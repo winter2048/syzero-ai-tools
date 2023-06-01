@@ -11,34 +11,45 @@ import {
   SelectTabEvent,
 } from "@fluentui/react-components";
 import * as React from "react";
-import { useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Header = () => {
+  const defaultMenu = "/chat";
   const location = useLocation();
   const navigate = useNavigate();
-  const defaultMenu = location.pathname;
+  const [tab, setTab] = React.useState(location.pathname);
   const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
-    navigate(data.value as string)
+    navigate(data.value as string);
+    setTab(data.value as string);
   };
   const onLogOut = () => {
     window.localStorage.setItem("token", "");
     navigate("/login");
   };
 
+  React.useEffect(() => {
+    if (location.pathname === "/") {
+      navigate(defaultMenu);
+      setTab(defaultMenu);
+    }
+  }, [location.pathname, navigate]);
+
   return (
     <div className="sy-header">
-      <TabList defaultSelectedValue={defaultMenu} onTabSelect={onTabSelect}>
-        <Tab value="/app/chat" >Chat</Tab>
-        <Tab value="/app/image" >Image</Tab>
-        <Tab value="/app/text">Text</Tab>
-        <Tab value="/app/setting">Setting</Tab>
+      <TabList
+        defaultSelectedValue={defaultMenu}
+        onTabSelect={onTabSelect}
+        selectedValue={tab}
+      >
+        <Tab value="/chat">Chat</Tab>
+        <Tab value="/image">Image</Tab>
+        <Tab value="/text">Text</Tab>
+        <Tab value="/setting">Setting</Tab>
       </TabList>
 
       <Menu>
         <MenuTrigger disableButtonEnhancement>
-          <MenuButton appearance="subtle" >
-            你好，SYZERO
-          </MenuButton>
+          <MenuButton appearance="subtle">你好，SYZERO</MenuButton>
         </MenuTrigger>
 
         <MenuPopover>

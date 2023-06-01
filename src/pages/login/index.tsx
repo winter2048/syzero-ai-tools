@@ -50,7 +50,7 @@ function Login() {
   const onLoginClick = () => {
     console.log(`User: "${user}"  Password:"${password}"`);
     window.localStorage.setItem("token", "sssss");
-    navigate("/app/chat");
+    navigate("/chat");
   };
 
   return (

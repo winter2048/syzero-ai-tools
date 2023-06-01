@@ -6,11 +6,12 @@ const App = lazy(() => import("../pages/app"));
 const Chat = lazy(() => import("../pages/app/chat"));
 const Image = lazy(() => import("../pages/app/image"));
 const Text = lazy(() => import("../pages/app/text"));
+const Setting = lazy(() => import("../pages/app/setting"));
 const Login = lazy(() => import("../pages/login"));
 
 const router: Array<RouteObject> = [
   {
-    path: "/app",
+    path: "/",
     element: (
       <React.Suspense fallback={<div>Loading...</div>}>
         <RequireAuth>
@@ -40,6 +41,14 @@ const router: Array<RouteObject> = [
         element: (
           <React.Suspense fallback={<div>Loading...</div>}>
             <Text />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "setting",
+        element: (
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Setting />
           </React.Suspense>
         ),
       },
