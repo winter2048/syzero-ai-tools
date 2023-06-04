@@ -1,21 +1,20 @@
 import { IActionType } from "../../utils/constant";
 
-const initUserState: IUser = {
-  id: 0,
-  name: "",
+const initConfig: IConfig = {
+    SERVER_URL: "sssssssss"
 };
 
-const user = (
-  state: IUser = initUserState,
+const config = (
+  state: IConfig = initConfig,
   action: { type: IActionType; payload: any }
 ) => {
   switch (action.type) {
-    case IActionType.UserInit:
+    case IActionType.ConfigInit:
       return state;
-    case IActionType.UserChange:
+    case IActionType.ConfigChange:
       return { ...state, ...action.payload };
     default:
       return state;
   }
 };
-export default user;
+export default config;

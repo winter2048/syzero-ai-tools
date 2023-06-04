@@ -6,7 +6,12 @@ interface IUser {
 }
 
 interface IState {
-  user: IUser;
+  user?: IUser;
+  config?: IConfig;
+}
+
+interface IConfig{
+  SERVER_URL: string;
 }
 
 interface RequestResult<T> {

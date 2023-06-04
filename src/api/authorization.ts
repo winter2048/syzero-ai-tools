@@ -1,8 +1,9 @@
 import { request } from "../utils/request";
+import store from "../store";
 
 export function Login(name: string, pwd: string) {
   return request.post<string>(
-    "http://192.168.2.130:5001/api/SyZero.Authorization/Auth/Login",
+    `${store.getState().config.SERVER_URL_LOGIN}/api/SyZero.Authorization/Auth/Login`,
     {
       userName: name,
       passWord: pwd,
@@ -13,19 +14,19 @@ export function Login(name: string, pwd: string) {
 
 export function LogOut() {
   return request.post<boolean>(
-    "http://192.168.2.130:5001/api/SyZero.Authorization/Auth/LogOut"
+    `${store.getState().config.SERVER_URL_LOGIN}/api/SyZero.Authorization/Auth/LogOut`
   );
 }
 
 export function GetUserInfo() {
   return request.get<UserDto>(
-    "http://192.168.2.130:5001/api/SyZero.Authorization/User/UserInfo"
+    `${store.getState().config.SERVER_URL_LOGIN}/api/SyZero.Authorization/User/UserInfo`
   );
 }
 
 export function PutUserInfo(user: UserDto) {
   return request.put<UserDto>(
-    "http://192.168.2.130:5001/api/SyZero.Authorization/User/UserInfo",
+    `${store.getState().config.SERVER_URL_LOGIN}/api/SyZero.Authorization/User/UserInfo`,
     user
   );
 }

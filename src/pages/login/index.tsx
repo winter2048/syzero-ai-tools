@@ -16,6 +16,7 @@ import {
 import { PersonRegular, PasswordRegular } from "@fluentui/react-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Authorization } from "../../api";
+import store from "../../store";
 import "../../style/login.css";
 
 const useStyles = makeStyles({
@@ -83,7 +84,7 @@ function Login() {
   return (
     <div className="container">
       <div className="login-wrapper">
-        <div className="header">AI Tools</div>
+        <div className="header">{ store.getState().config.APP_TITLE }</div>
         <div className="header-subtitle">登录</div>
         <div className="form-wrapper">
           <div className="input-item">

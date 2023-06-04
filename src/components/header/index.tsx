@@ -54,7 +54,7 @@ export const Header = () => {
 
       <Menu>
         <MenuTrigger disableButtonEnhancement>
-          <MenuButton appearance="subtle">你好，{ user.name }</MenuButton>
+          <MenuButton appearance="subtle">你好，{ user?.name }</MenuButton>
         </MenuTrigger>
 
         <MenuPopover>

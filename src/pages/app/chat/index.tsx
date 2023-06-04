@@ -21,8 +21,6 @@ import { MoreHorizontal24Filled } from "@fluentui/react-icons";
 import "../../../style/chat.css";
 
 function Chat() {
-  const { user } = useSelector((state: rootState) => state.user);
-  const dispatch = useDispatch();
   const chatBoxRef = React.useRef<HTMLDivElement>(null);
   const [bottomColor, setBottomColor] = React.useState("#f5f5f5");
   const [sessionList, setSessionList] = React.useState<ChatSession[]>([]);
