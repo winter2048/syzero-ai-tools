@@ -11,12 +11,10 @@ import {
   TextareaProps,
   TextareaOnChangeData,
 } from "@fluentui/react-components";
-import { rootState } from "../../../store";
 import SyChatMessage from "../../../components/sy-chat/sy-chat-message";
 import SyChatSession from "../../../components/sy-chat/sy-chat-session";
 import { OpenAI } from "../../../api";
 import { weChatDate } from "../../../utils/date";
-import { useDispatch, useSelector } from "react-redux";
 import { MoreHorizontal24Filled } from "@fluentui/react-icons";
 import "../../../style/chat.css";
 
@@ -126,6 +124,7 @@ function Chat() {
       }
     };
     fun();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

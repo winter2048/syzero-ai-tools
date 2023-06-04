@@ -11,9 +11,9 @@ import {
 } from "@fluentui/react-components";
 import Routes from "./routers";
 import { Provider } from "react-redux";
-import store, { rootState } from "./store";
+import store from "./store";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IActionType } from "./utils/constant";
 import "./style/index.css";
 

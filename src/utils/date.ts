@@ -17,7 +17,7 @@ export function formatDate(date: Date, fmt: string) {
     if (new RegExp("(" + k + ")").test(fmt))
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+        RegExp.$1.length === 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
       );
   return fmt;
 }
@@ -54,14 +54,14 @@ export function weChatDate(time: string) {
   var timeExtraStr = mustIncludeTime ? " " + formatDate(srcDate, "hh:mm") : "";
 
   // 当年
-  if (currentYear == srcYear) {
+  if (currentYear === srcYear) {
     var currentTimestamp = currentDate.getTime();
     var srcTimestamp = timestamp;
     // 相差时间（单位：毫秒）
     var deltaTime = currentTimestamp - srcTimestamp;
 
     // 当天（月份和日期一致才是）
-    if (currentMonth == srcMonth && currentDateD == srcDateD) {
+    if (currentMonth === srcMonth && currentDateD === srcDateD) {
       // 时间相差60秒以内
       if (deltaTime < 60 * 1000) ret = "刚刚";
       // 否则当天其它时间段的，直接显示“时:分”的形式
@@ -81,14 +81,14 @@ export function weChatDate(time: string) {
       // 的形式，是不准确的，比如：现在时刻是2019年02月22日1:00、而srcDate是2019年02月21日23:00，
       // 这两者间只相差2小时，直接用“deltaTime/(3600 * 1000)” > 24小时来判断是否昨天，就完全是扯蛋的逻辑了）
       if (
-        srcMonth == yesterdayDate.getMonth() + 1 &&
-        srcDateD == yesterdayDate.getDate()
+        srcMonth === yesterdayDate.getMonth() + 1 &&
+        srcDateD === yesterdayDate.getDate()
       )
         ret = "昨天" + timeExtraStr; // -1d
       // “前天”判断逻辑同上
       else if (
-        srcMonth == beforeYesterdayDate.getMonth() + 1 &&
-        srcDateD == beforeYesterdayDate.getDate()
+        srcMonth === beforeYesterdayDate.getMonth() + 1 &&
+        srcDateD === beforeYesterdayDate.getDate()
       )
         ret = "前天" + timeExtraStr; // -2d
       else {

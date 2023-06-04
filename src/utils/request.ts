@@ -63,7 +63,7 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             const data = res.data;
             if(data.code !== 1){
                 //特定状态码 处理特定的需求
-                if(data.code == 401){
+                if(data.code === 401){
                     console.log('登录异常，执行登出...');
                 }
 

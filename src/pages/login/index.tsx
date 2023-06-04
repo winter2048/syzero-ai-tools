@@ -1,42 +1,19 @@
 import React from "react";
 import {
-  makeStyles,
-  shorthands,
   useId,
-  Body1,
   Button,
   Input,
-  Label,
-  Text,
-  ButtonProps,
   InputProps,
   InputOnChangeData,
   Field,
 } from "@fluentui/react-components";
 import { PersonRegular, PasswordRegular } from "@fluentui/react-icons";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Authorization } from "../../api";
 import store from "../../store";
 import "../../style/login.css";
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    ...shorthands.gap("20px"),
-    // Prevent the example from taking the full width of the page (optional)
-    maxWidth: "400px",
-    // Stack the label above the field (with 2px gap per the design system)
-    "> div": {
-      display: "flex",
-      flexDirection: "column",
-      ...shorthands.gap("2px"),
-    },
-  },
-});
-
 function Login() {
-  const styles = useStyles();
   const userId = useId("content-user");
   const passwordId = useId("input-password");
   const navigate = useNavigate();
@@ -124,7 +101,7 @@ function Login() {
         </div>
         <div className="msg">
           没有帐户
-          <a href="#" style={{ marginLeft: "5px" }}>
+          <a href="#1" style={{ marginLeft: "5px" }}>
             注册
           </a>
         </div>

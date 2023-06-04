@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus, materialLight, materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vscDarkPlus, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // darcula webstorm
 // vscDarkPlus vscode暗色主题
