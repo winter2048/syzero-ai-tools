@@ -13,13 +13,14 @@ import {
 import * as React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Authorization } from "../../api";
-import store from "../../store";
+import { useSelector } from 'react-redux';
 
 export const Header = () => {
   const defaultMenu = "/chat";
   const location = useLocation();
   const navigate = useNavigate();
   const [tab, setTab] = React.useState(location.pathname);
+  const userName = useSelector((state: any) => state.user.name);
   const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
     navigate(data.value as string);
     setTab(data.value as string);
@@ -52,7 +53,7 @@ export const Header = () => {
 
       <Menu>
         <MenuTrigger disableButtonEnhancement>
-          <MenuButton appearance="subtle">你好，{ store.getState().user.name }</MenuButton>
+          <MenuButton appearance="subtle">你好，{ userName }</MenuButton>
         </MenuTrigger>
 
         <MenuPopover>
