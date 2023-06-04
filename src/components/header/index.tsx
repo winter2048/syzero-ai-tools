@@ -14,7 +14,7 @@ import * as React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Authorization } from "../../api";
 import { rootState } from "../../store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const defaultMenu = "/chat";
@@ -54,7 +54,7 @@ export const Header = () => {
 
       <Menu>
         <MenuTrigger disableButtonEnhancement>
-          <MenuButton appearance="subtle">你好，{ user.name }</MenuButton>
+          <MenuButton appearance="subtle">你好，{ user?.name }</MenuButton>
         </MenuTrigger>
 
         <MenuPopover>

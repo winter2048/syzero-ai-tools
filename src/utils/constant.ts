@@ -1,4 +1,7 @@
-export enum IUserActionType {
-  INIT,
-  CHANGE,
+export enum IActionType {
+  UserInit,
+  UserChange,
+  ConfigInit,
+  ConfigChange,
 }
+

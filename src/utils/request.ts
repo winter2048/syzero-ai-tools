@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import store from "../store";
 
 //基础URL，axios将会自动拼接在url前
 //process.env.NODE_ENV 判断是否为开发环境 根据不同环境使用不同的baseURL 方便调试
-let baseURL = process.env.NODE_ENV === 'development'? '' : '';
+let baseURL =  store.getState().config.SERVER_URL;
 
 //默认请求超时时间
 const timeout = 90000;
@@ -62,7 +63,7 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             const data = res.data;
             if(data.code !== 1){
                 //特定状态码 处理特定的需求
-                if(data.code == 401){
+                if(data.code === 401){
                     console.log('登录异常，执行登出...');
                 }
 
