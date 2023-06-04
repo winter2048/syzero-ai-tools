@@ -8,7 +8,7 @@ const initUserState: IUser = {
 const user = (
   state: IUser = initUserState,
   action: { type: IActionType; payload: any }
-) => {
+):IUser => {
   switch (action.type) {
     case IActionType.UserInit:
       return state;

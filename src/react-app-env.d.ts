@@ -5,13 +5,10 @@ interface IUser {
   name: string;
 }
 
-interface IState {
-  user?: IUser;
-  config?: IConfig;
-}
-
 interface IConfig{
-  SERVER_URL: string;
+  SERVER_URL?: string;
+  SERVER_URL_LOGIN?: string;
+  APP_TITLE?: string;
 }
 
 interface RequestResult<T> {

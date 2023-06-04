@@ -7,7 +7,7 @@ const initConfig: IConfig = {
 const config = (
   state: IConfig = initConfig,
   action: { type: IActionType; payload: any }
-) => {
+): IConfig => {
   switch (action.type) {
     case IActionType.ConfigInit:
       return state;
