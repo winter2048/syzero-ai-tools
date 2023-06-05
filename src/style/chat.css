@@ -216,6 +216,35 @@
     min-width: 30px;
     min-height: 14px;
     margin: 6px 10px;
+    position: relative;
+}
+
+.sy-chat-room-center-left .sy-chat-room-text:before {
+    left: -15px;
+    background-color: white;
+    position: absolute;
+    top: 1px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: '\00a0';
+    border-left: 1px #ededed solid;
+    border-bottom: 1px #ededed solid;
+    transform: rotate(29deg) skew(-35deg);
+}
+
+.sy-chat-room-center-right .sy-chat-room-text:before {
+    right: -15px;
+    background-color: #9eeb6b;
+    position: absolute;
+    top: 1px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: '\00a0';
+    border-right: 1px #9eeb6b solid;
+    border-top: 1px #9eeb6b solid;
+    transform: rotate(29deg) skew(-35deg);
 }
 
 .sy-chat-room-bottom {
