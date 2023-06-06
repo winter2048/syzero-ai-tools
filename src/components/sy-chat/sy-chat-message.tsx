@@ -18,7 +18,7 @@ export const SyChatMessage = (props: ContentProps) => {
           <div className="sy-chat-room-center-content-name">{props.name}</div>
           <div className="sy-chat-room-center-content-text">
             <div className="sy-chat-room-text">
-            <OmsViewMarkdown textContent={props.text}  darkMode={true} />
+            <OmsViewMarkdown textContent={props.text}  darkMode={true} switchRight={true}/>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@ export const SyChatMessage = (props: ContentProps) => {
         <div className="sy-chat-room-center-content">
           <div className="sy-chat-room-center-content-text">
             <div className="sy-chat-room-text">
-            {props.text}
+            <OmsViewMarkdown textContent={props.text}  darkMode={true} switchRight={false}/>
              </div>
           </div>
         </div>

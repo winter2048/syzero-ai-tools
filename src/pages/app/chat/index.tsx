@@ -13,13 +13,14 @@ import {
 } from "@fluentui/react-components";
 import SyChatMessage from "../../../components/sy-chat/sy-chat-message";
 import SyChatSession from "../../../components/sy-chat/sy-chat-session";
+import SyScrollList from "../../../components/sy-scroll-list";
 import { OpenAI } from "../../../api";
 import { weChatDate } from "../../../utils/date";
 import { MoreHorizontal24Filled } from "@fluentui/react-icons";
 import "../../../style/chat.css";
 
 function Chat() {
-  const chatBoxRef = React.useRef<HTMLDivElement>(null);
+  const chatBoxRef = React.useRef<any>(null);
   const [bottomColor, setBottomColor] = React.useState("#f5f5f5");
   const [sessionList, setSessionList] = React.useState<ChatSession[]>([]);
   const [currentSession, setCurrentSession] = React.useState("");
@@ -104,7 +105,7 @@ function Chat() {
   };
 
   const chatScrollToBottom = () => {
-    const chatBox = chatBoxRef.current;
+    const chatBox = chatBoxRef.current.parentRef.current;
     if (chatBox) {
       chatBox.scrollTop = chatBox.scrollHeight - chatBox.clientHeight;
     }
@@ -169,19 +170,18 @@ function Chat() {
             </Menu>
           </div>
         </div>
-        <div
-          className="sy-chat-room-center sy-list-hover-scroll"
-          ref={chatBoxRef}
-        >
-          {sessionList
-            .find((p) => p.id === currentSession)
-            ?.messages.map((d) => (
-              <SyChatMessage
-                role={d.role}
-                name={d.role === 1 ? "AI" : ""}
-                text={d.content}
-              />
-            ))}
+        <div className="sy-chat-room-center">
+          <SyScrollList ref={chatBoxRef}>
+            {sessionList
+              .find((p) => p.id === currentSession)
+              ?.messages.map((d) => (
+                <SyChatMessage
+                  role={d.role}
+                  name={d.role === 1 ? "AI" : ""}
+                  text={d.content}
+                />
+              ))}
+          </SyScrollList>
         </div>
         <div
           className="sy-chat-room-bottom"
