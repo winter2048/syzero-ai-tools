@@ -43,9 +43,16 @@
 }
 
 .sy-chat-session-list {
-    height: calc(100% - 65px);
+    height: calc(100% - 105px);
     margin-top: 15px;
     overflow-y: overlay;
+}
+
+.sy-chat-session-switch {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sy-chat-session-item {
@@ -180,7 +187,7 @@
 
 .sy-chat-room-center-content {
     margin-left: 5px;
-    margin-right: 5px;
+    margin-right: 20px;
     max-width: 75%;
 }
 
@@ -200,6 +207,7 @@
     width: -webkit-fit-content;
     width: -moz-fit-content;
     font-size: 14px;
+    width: 100%;
 }
 
 .sy-chat-room-center-right .sy-chat-room-center-content-text {

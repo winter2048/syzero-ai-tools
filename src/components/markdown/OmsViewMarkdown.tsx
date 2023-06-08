@@ -33,7 +33,7 @@ const OmsViewMarkdown = (props: tProps) => {
           setIsSourceCode(!isSourceCode);
         }}
         style={{
-          top: "-12px",
+          top: "-13px",
           right: switchRight ? "-8px" : "auto",
           left: !switchRight ? "-9px" : "auto",
         }}

@@ -1,6 +1,7 @@
 import { RouteObject, useRoutes } from "react-router-dom";
 import React, { lazy } from "react";
 import RequireAuth from "../components/requireAuth";
+import { Spinner } from "@fluentui/react-components";
 // react懒加载
 const App = lazy(() => import("../pages/app"));
 const Chat = lazy(() => import("../pages/app/chat"));
@@ -23,7 +24,7 @@ const router: Array<RouteObject> = [
       {
         path: "chat",
         element: (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<Spinner/>}>
             <Chat />
           </React.Suspense>
         ),
@@ -31,7 +32,7 @@ const router: Array<RouteObject> = [
       {
         path: "image",
         element: (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<Spinner/>}>
             <Image />
           </React.Suspense>
         ),
@@ -39,7 +40,7 @@ const router: Array<RouteObject> = [
       {
         path: "text",
         element: (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<Spinner/>}>
             <Text />
           </React.Suspense>
         ),
@@ -47,7 +48,7 @@ const router: Array<RouteObject> = [
       {
         path: "setting",
         element: (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<Spinner/>}>
             <Setting />
           </React.Suspense>
         ),
@@ -57,7 +58,7 @@ const router: Array<RouteObject> = [
   {
     path: "/login",
     element: (
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<Spinner/>}>
         <Login />
       </React.Suspense>
     ),

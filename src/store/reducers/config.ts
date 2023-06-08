@@ -1,7 +1,7 @@
 import { IActionType } from "../../utils/constant";
 
 const initConfig: IConfig = {
-    SERVER_URL: "sssssssss"
+    SERVER_URL: ""
 };
 
 const config = (
