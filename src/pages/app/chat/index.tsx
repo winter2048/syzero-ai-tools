@@ -39,7 +39,7 @@ function Chat() {
   const [isConnection, setIsConnection] = useState(true);
   const [isWebsocket, setIsWebsocket] = useState(false);
   const [connection] = useSignalR({
-    url: `${store.getState().config.SERVER_URL_LOGIN}/chathub`,
+    url: `${store.getState().config.SERVER_URL}/chathub`,
   });
 
   connection?.on("ReceiveMessage", (sessions: ChatSessionDto[]) => {
