@@ -37,7 +37,7 @@ function Chat() {
   const [currentSession, setCurrentSession] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [isConnection, setIsConnection] = useState(true);
-  const [isWebsocket, setIsWebsocket] = useState(false);
+  const [isWebsocket, setIsWebsocket] = useState(true);
   const [connection] = useSignalR({
     url: `${store.getState().config.SERVER_URL}/chathub`,
   });

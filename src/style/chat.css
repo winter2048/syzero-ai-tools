@@ -145,6 +145,10 @@
     margin-left: 30px;
     margin-top: 12px;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 100px;
 }
 
 .sy-chat-room-center {
