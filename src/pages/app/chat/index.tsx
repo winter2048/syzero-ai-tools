@@ -4,7 +4,6 @@ import {
   Input,
   Label,
   Select,
-  Option,
   useScrollbarWidth,
   useFluent,
   createTableColumn,
@@ -48,7 +47,7 @@ import SyScrollList from "../../../components/sy-scroll-list";
 import { OpenAI, Scene } from "../../../api";
 import { weChatDate } from "../../../utils/date";
 import useSignalR from "../../../utils/useSignalR";
-import { MoreHorizontal24Filled, Clover24Regular, Delete24Regular, Save24Regular, Dismiss24Regular,EditRegular,DismissCircle24Regular,AddCircle24Regular  } from "@fluentui/react-icons";
+import { MoreHorizontal24Filled, Clover24Regular, Delete24Regular, Save24Regular, Dismiss24Regular,EditRegular, AddCircle24Regular  } from "@fluentui/react-icons";
 import store from "../../../store";
 import "../../../style/chat.css";
 
