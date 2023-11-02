@@ -45,10 +45,10 @@ export const Header = () => {
         onTabSelect={onTabSelect}
         selectedValue={tab}
       >
-        <Tab value="/chat">Chat</Tab>
-        <Tab value="/image">Image</Tab>
-        <Tab value="/text">Text</Tab>
-        <Tab value="/setting">Setting</Tab>
+        <Tab value="/chat">聊天</Tab>
+        <Tab value="/image">图片</Tab>
+        <Tab value="/setting">设置</Tab>
+        <Tab value="/text">管理</Tab>
       </TabList>
 
       <Menu>

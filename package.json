@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui-contrib/react-data-grid-react-window": "^1.1.2",
     "@fluentui/react-components": "^9.20.4",
     "@microsoft/signalr": "^7.0.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -21,6 +22,7 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
+    "react-window": "^1.8.9",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
@@ -52,6 +54,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.7"
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/react-window": "^1.8.7"
   }
 }

@@ -47,10 +47,10 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             response = service.get(url, {params: { ...params }, ...config});
             break;
         case 'post':
-            response = service.post(url, {...params}, {...config});
+            response = service.post(url, params, {...config});
             break;
         case 'put':
-            response = service.put(url, {...params}, {...config});
+            response = service.put(url, params, {...config});
             break;
         case 'delete':
             response = service.delete(url, {params: { ...params }, ...config});

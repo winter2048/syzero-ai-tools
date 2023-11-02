@@ -57,3 +57,12 @@ interface ChatSession {
   date: string;
   messages: Array<ChatMessageDto>;
 }
+
+interface SceneDto {
+  id: string;
+  name: string;
+  describe: string;
+  content: Array<ChatMessageDto>;
+  createTime?: string;
+  isDefault: boolean
+}

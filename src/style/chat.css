@@ -152,7 +152,7 @@
 }
 
 .sy-chat-room-center {
-    height: calc(100% - 206px);
+    height: calc(100% - 216px);
 }
 
 .sy-chat-room-center-left {
@@ -257,24 +257,28 @@
 
 .sy-chat-room-bottom {
     width: 100%;
-    height: 144px;
+    height: 154px;
     border-top: 1px #ececec solid;
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+}
+
+.sy-chat-room-toolbar {
+    margin-left: 12px;
 }
 
 .sy-chat-room-input {
     width: 100%;
     height: 105px;
-    padding: 15px 28px 8px 28px;
+    padding: 0px 28px 5px 28px;
     box-sizing: border-box;
 }
 
 .sy-chat-room-send {
     margin-right: 40px;
     margin-bottom: 5px;
+    align-self: flex-end;
 }
 
 .sy-chat-room-input span::after {
@@ -309,4 +313,60 @@
 
 .sy-show-switch:hover {
     opacity: .8;
+}
+
+.sy-scene-des {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sy-scence-edit-msg-item {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.sy-scence-edit-msg-item-left {
+    width: 150px;
+    display: inline-flex;
+}
+
+.sy-scence-edit-msg-item-content {
+    width: 100%;
+    margin: 0px 10px;
+}
+
+.sy-scence-edit-msg-add {
+    height: 32px;
+}
+
+.sy-scence-edit-msg-add {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    justify-content: center;
+}
+
+.sy-scence-edit-msg-add-btn {
+    width: 100%;
+}
+
+.sy-scence-edit-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.sy-scence-edit-form-label {
+    display: inline-block;
+    width: 100px;
+}
+
+.sy-scence-edit-form-input {
+    width: 70%;
 }
