@@ -6,8 +6,8 @@
       "APP_TITLE": "AI Tools (Dev)"
     },
     "Production": {
-      "SERVER_URL": "http://192.168.2.120:5003",
-      "SERVER_URL_LOGIN": "http://192.168.2.120:5001",
+      "SERVER_URL": "https://openai.syzero.com",
+      "SERVER_URL_LOGIN": "https://authorization.syzero.com",
       "APP_TITLE": "AI Tools"
     },
     "Test": {
