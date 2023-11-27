@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   vscDarkPlus,
-  materialLight,
+  materialLight
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // darcula webstorm
@@ -50,7 +50,7 @@ const OmsViewMarkdown = (props: tProps) => {
             components={{
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
-                return (
+                return !inline ? (
                   <SyntaxHighlighter
                     showLineNumbers={true}
                     style={darkMode ? (them.dark as any) : (them.light as any)}
@@ -60,6 +60,10 @@ const OmsViewMarkdown = (props: tProps) => {
                   >
                     {String(children).replace(/\n$/, "")}
                   </SyntaxHighlighter>
+                ) : (
+                  <code className={"sy-code-inline " + className} {...props}>
+                    {children}
+                  </code>
                 );
               },
             }}

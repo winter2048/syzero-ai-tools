@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { redirect } from "react-router-dom";
 import store from "../store";
 
 //基础URL，axios将会自动拼接在url前
@@ -63,8 +64,10 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             const data = res.data;
             if(data.code !== 1){
                 //特定状态码 处理特定的需求
-                if(data.code === 401){
+                if(data.code === -3){
                     console.log('登录异常，执行登出...');
+                    window.localStorage.setItem("token", "");
+                    redirect("/login");
                 }
 
                 let e = JSON.stringify(data);

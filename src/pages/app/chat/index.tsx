@@ -455,6 +455,7 @@ function Chat() {
         <div className="sy-chat-session-list sy-list-hover-scroll">
           {sessionList.map((p) => (
             <SyChatSession
+              key={p.id}
               title={p.title}
               text={p.text}
               date={p.date}
@@ -501,6 +502,7 @@ function Chat() {
               .find((p) => p.id === currentSession)
               ?.messages.map((d) => (
                 <SyChatMessage
+                  key={d.content}
                   role={d.role}
                   name={d.role === 1 ? "AI" : ""}
                   text={d.content}

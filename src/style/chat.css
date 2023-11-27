@@ -140,6 +140,7 @@
 }
 
 .sy-chat-room-top-title {
+    font-weight: 600;
     height: 50px;
     line-height: 50px;
     margin-left: 30px;
@@ -369,4 +370,13 @@
 
 .sy-scence-edit-form-input {
     width: 70%;
+}
+
+.sy-code-inline {
+    font-size: 13px;
+    margin: 0px;
+    padding: .2em .4em;
+    background-color: rgba(175, 184, 193, 0.25);
+    border-radius: 6px;
+    font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
 }
