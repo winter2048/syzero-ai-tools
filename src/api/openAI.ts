@@ -14,6 +14,15 @@ export function DeleteSession(
   );
 }
 
+export function PutSession(
+  sessionId: string,
+  messages: Array<ChatMessageDto>
+): Promise<RequestResult<boolean>> {
+  return request.put<boolean>(
+    `/api/SyZero.OpenAI/Chat/Session/${sessionId}`, messages
+  );
+}
+
 export function GetSession(
   sessionId: string
 ): Promise<RequestResult<ChatSessionDto>> {

@@ -47,10 +47,10 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             response = service.get(url, {params: { ...params }, ...config});
             break;
         case 'post':
-            response = service.post(url, {...params}, {...config});
+            response = service.post(url, params, {...config});
             break;
         case 'put':
-            response = service.put(url, {...params}, {...config});
+            response = service.put(url, params, {...config});
             break;
         case 'delete':
             response = service.delete(url, {params: { ...params }, ...config});
@@ -63,8 +63,9 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             const data = res.data;
             if(data.code !== 1){
                 //特定状态码 处理特定的需求
-                if(data.code === 401){
+                if(data.code === -3){
                     console.log('登录异常，执行登出...');
+                    window.localStorage.setItem("token", "");
                 }
 
                 let e = JSON.stringify(data);

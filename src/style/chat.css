@@ -43,9 +43,16 @@
 }
 
 .sy-chat-session-list {
-    height: calc(100% - 65px);
+    height: calc(100% - 105px);
     margin-top: 15px;
     overflow-y: overlay;
+}
+
+.sy-chat-session-switch {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sy-chat-session-item {
@@ -133,18 +140,20 @@
 }
 
 .sy-chat-room-top-title {
+    font-weight: 600;
     height: 50px;
     line-height: 50px;
     margin-left: 30px;
     margin-top: 12px;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 100px;
 }
 
 .sy-chat-room-center {
-    height: calc(100% - 206px);
-    width: 100%;
-    overflow-y: overlay;
-    overflow-x: hidden;
+    height: calc(100% - 216px);
 }
 
 .sy-chat-room-center-left {
@@ -156,7 +165,7 @@
 }
 
 .sy-chat-room-center-left .sy-chat-room-center-content-text {
-    margin-right: 15px;
+    margin-left: 9px;
 }
 
 .sy-chat-room-center-right {
@@ -183,7 +192,8 @@
 
 .sy-chat-room-center-content {
     margin-left: 5px;
-    margin-right: 5px;
+    margin-right: 20px;
+    max-width: 75%;
 }
 
 .sy-chat-room-center-content-name {
@@ -195,8 +205,6 @@
 .sy-chat-room-center-content-text {
     border: 1px #ededed solid;
     background-color: white;
-    margin-left: 9px;
-    max-width: 90%;
     border-radius: 2px;
     margin-top: 7px;
     /* padding: 6px 10px; */
@@ -204,6 +212,7 @@
     width: -webkit-fit-content;
     width: -moz-fit-content;
     font-size: 14px;
+    width: 100%;
 }
 
 .sy-chat-room-center-right .sy-chat-room-center-content-text {
@@ -216,28 +225,61 @@
     min-width: 30px;
     min-height: 14px;
     margin: 6px 10px;
+    position: relative;
+}
+
+.sy-chat-room-center-left .sy-chat-room-text:before {
+    left: -15px;
+    background-color: white;
+    position: absolute;
+    top: 1px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: '\00a0';
+    border-left: 1px #ededed solid;
+    border-bottom: 1px #ededed solid;
+    transform: rotate(29deg) skew(-35deg);
+}
+
+.sy-chat-room-center-right .sy-chat-room-text:before {
+    right: -15px;
+    background-color: #9eeb6b;
+    position: absolute;
+    top: 1px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: '\00a0';
+    border-right: 1px #9eeb6b solid;
+    border-top: 1px #9eeb6b solid;
+    transform: rotate(29deg) skew(-35deg);
 }
 
 .sy-chat-room-bottom {
     width: 100%;
-    height: 144px;
+    height: 154px;
     border-top: 1px #ececec solid;
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+}
+
+.sy-chat-room-toolbar {
+    margin-left: 12px;
 }
 
 .sy-chat-room-input {
     width: 100%;
     height: 105px;
-    padding: 15px 28px 8px 28px;
+    padding: 0px 28px 5px 28px;
     box-sizing: border-box;
 }
 
 .sy-chat-room-send {
     margin-right: 40px;
     margin-bottom: 5px;
+    align-self: flex-end;
 }
 
 .sy-chat-room-input span::after {
@@ -252,4 +294,89 @@
 
 .sy-chat-room-input textarea::-webkit-scrollbar {
     width: 0px;
+}
+
+.sy-show-switch {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    right: 0px;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+    background: #3a3a3a;
+    opacity: .15;
+    line-height: 16px;
+    user-select: none;
+    font-size: 12px;
+}
+
+.sy-show-switch:hover {
+    opacity: .8;
+}
+
+.sy-scene-des {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sy-scence-edit-msg-item {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.sy-scence-edit-msg-item-left {
+    width: 150px;
+    display: inline-flex;
+}
+
+.sy-scence-edit-msg-item-content {
+    width: 100%;
+    margin: 0px 10px;
+}
+
+.sy-scence-edit-msg-add {
+    height: 32px;
+}
+
+.sy-scence-edit-msg-add {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    justify-content: center;
+}
+
+.sy-scence-edit-msg-add-btn {
+    width: 100%;
+}
+
+.sy-scence-edit-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.sy-scence-edit-form-label {
+    display: inline-block;
+    width: 100px;
+}
+
+.sy-scence-edit-form-input {
+    width: 70%;
+}
+
+.sy-code-inline {
+    font-size: 13px;
+    margin: 0px;
+    padding: .2em .4em;
+    background-color: rgba(175, 184, 193, 0.25);
+    border-radius: 6px;
+    font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
 }

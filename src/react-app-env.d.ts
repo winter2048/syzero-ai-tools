@@ -5,13 +5,10 @@ interface IUser {
   name: string;
 }
 
-interface IState {
-  user?: IUser;
-  config?: IConfig;
-}
-
 interface IConfig{
-  SERVER_URL: string;
+  SERVER_URL?: string;
+  SERVER_URL_LOGIN?: string;
+  APP_TITLE?: string;
 }
 
 interface RequestResult<T> {
@@ -59,4 +56,13 @@ interface ChatSession {
   text: string;
   date: string;
   messages: Array<ChatMessageDto>;
+}
+
+interface SceneDto {
+  id: string;
+  name: string;
+  describe: string;
+  content: Array<ChatMessageDto>;
+  createTime?: string;
+  isDefault: boolean
 }

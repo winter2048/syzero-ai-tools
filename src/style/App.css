@@ -18,6 +18,12 @@
   width: 100%;
 }
 
+.sy-list-hover-scroll {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
+
 .sy-list-hover-scroll::-webkit-scrollbar {
   width: 0px;
 }
