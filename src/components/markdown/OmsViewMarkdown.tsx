@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import RemarkGfm from "remark-gfm";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   vscDarkPlus,
-  materialLight
+  materialLight,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
+import "github-markdown-css/github-markdown.css";
 
 // darcula webstorm
 // vscDarkPlus vscode暗色主题
@@ -23,6 +26,7 @@ const them = {
 const OmsViewMarkdown = (props: tProps) => {
   const { textContent, darkMode, switchRight } = props;
   const [isSourceCode, setIsSourceCode] = useState<boolean>(false);
+  const [isCopy, setIsCopy] = useState(false);
 
   return (
     <div style={{ position: "relative" }}>
@@ -47,19 +51,39 @@ const OmsViewMarkdown = (props: tProps) => {
           </pre>
         ) : (
           <ReactMarkdown
+            remarkPlugins={[RemarkGfm]}
+            className="markdown-body markdown-body-my"
             components={{
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
                 return !inline ? (
-                  <SyntaxHighlighter
-                    showLineNumbers={true}
-                    style={darkMode ? (them.dark as any) : (them.light as any)}
-                    language={!inline && match ? match[1] : ""}
-                    PreTag="div"
-                    {...props}
+                  <div
+                    onMouseLeave={() => {
+                      setIsCopy(false);
+                    }}
                   >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
+                    <CopyToClipboard
+                      text={String(children).replace(/\n$/, "")}
+                      onCopy={() => {
+                        setIsCopy(true);
+                      }}
+                    >
+                      <span className="copy-code-button">
+                        {isCopy ? "copied" : "copy"}
+                      </span>
+                    </CopyToClipboard>
+                    <SyntaxHighlighter
+                      showLineNumbers={false}
+                      style={
+                        darkMode ? (them.dark as any) : (them.light as any)
+                      }
+                      language={!inline && match ? match[1] : ""}
+                      PreTag="pre"
+                      {...props}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  </div>
                 ) : (
                   <code className={"sy-code-inline " + className} {...props}>
                     {children}
