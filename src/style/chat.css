@@ -51,8 +51,10 @@
 .sy-chat-session-switch {
     height: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    padding: 0px 5px;
 }
 
 .sy-chat-session-item {
