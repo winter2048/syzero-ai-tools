@@ -48,6 +48,7 @@ interface ChatMessageDto {
 interface SendMessageDto{
   sessionId: string;
   message: string;
+  model?: string;
 }
 
 interface ChatSession {

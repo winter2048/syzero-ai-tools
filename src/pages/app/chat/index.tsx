@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import { 
-  Checkbox,  
+import {
+  Checkbox,
   Input,
   Label,
   Select,
@@ -30,7 +30,7 @@ import {
   SwitchProps,
   SwitchOnChangeData,
   Tooltip,
-  TableColumnSizingOptions
+  TableColumnSizingOptions,
 } from "@fluentui/react-components";
 import {
   DataGridBody,
@@ -39,15 +39,23 @@ import {
   DataGridHeader,
   DataGridCell,
   DataGridHeaderCell,
-  RowRenderer
-} from '@fluentui-contrib/react-data-grid-react-window';
+  RowRenderer,
+} from "@fluentui-contrib/react-data-grid-react-window";
 import SyChatMessage from "../../../components/sy-chat/sy-chat-message";
 import SyChatSession from "../../../components/sy-chat/sy-chat-session";
 import SyScrollList from "../../../components/sy-scroll-list";
 import { OpenAI, Scene } from "../../../api";
 import { weChatDate } from "../../../utils/date";
 import useSignalR from "../../../utils/useSignalR";
-import { MoreHorizontal24Filled, Clover24Regular, Delete24Regular, Save24Regular, Dismiss24Regular,EditRegular, AddCircle24Regular  } from "@fluentui/react-icons";
+import {
+  MoreHorizontal24Filled,
+  Clover24Regular,
+  Delete24Regular,
+  Save24Regular,
+  Dismiss24Regular,
+  EditRegular,
+  AddCircle24Regular,
+} from "@fluentui/react-icons";
 import store from "../../../store";
 import "../../../style/chat.css";
 
@@ -63,8 +71,9 @@ function Chat() {
   const [isShowSceneEdit, setIsShowSceneEdit] = useState(false);
   const [sceneList, setSceneList] = useState<SceneDto[]>([]);
   const [scene, setScene] = useState<SceneDto>();
-  const currentSessionRef = useRef(currentSession)
-  currentSessionRef.current = currentSession
+  const [gptModel, setGptModel] = useState<string>("gpt-3.5-turbo");
+  const currentSessionRef = useRef(currentSession);
+  currentSessionRef.current = currentSession;
 
   const [connection] = useSignalR({
     url: `${store.getState().config.SERVER_URL}/chathub`,
@@ -116,6 +125,12 @@ function Chat() {
     });
   };
 
+  const GPTModelOptions = [
+    { key: "GPT3.5", value: "gpt-3.5-turbo" },
+    { key: "GPT4", value: "gpt-4-1106-preview" },
+    { key: "GPT4-Vision", value: "gpt-4-vision-preview" },
+  ];
+
   const onInputFocus = () => {
     setBottomColor("#fff");
   };
@@ -160,9 +175,14 @@ function Chat() {
       await connection?.invoke("SendMessage", {
         SessionId: currentSessionRef.current,
         Message: msg,
+        Model: gptModel,
       });
     } else {
-      await OpenAI.SendMessage({ sessionId: currentSessionRef.current, message: msg });
+      await OpenAI.SendMessage({
+        sessionId: currentSessionRef.current,
+        message: msg,
+        model: gptModel,
+      });
       await updateData();
     }
   };
@@ -188,55 +208,63 @@ function Chat() {
   };
 
   const onCleanUpMsg = async () => {
-    await OpenAI.PutSession(currentSessionRef.current,[]).catch(res=>console.log(res.msg));
+    await OpenAI.PutSession(currentSessionRef.current, []).catch((res) =>
+      console.log(res.msg)
+    );
     await updateData();
-  }
+  };
 
   const onKeyDown = async (e: any) => {
-    if(e.key === 'Enter' && e.ctrlKey) {
+    if (e.key === "Enter" && e.ctrlKey) {
       await onClickSend();
     }
   };
 
-  const onClickScene = async (item: SceneDto) =>{
-    await OpenAI.PutSession(currentSessionRef.current,item.content).catch(res=>console.log(res.msg));
+  const onClickScene = async (item: SceneDto) => {
+    await OpenAI.PutSession(currentSessionRef.current, item.content).catch(
+      (res) => console.log(res.msg)
+    );
     await updateData();
     setIsShowDefaultScene(false);
-  }
+  };
 
-  const onClickDelScene = async (item: SceneDto) =>{
-    await Scene.DeleteScene(item.id).catch(res=>console.log(res.msg));
+  const onClickDelScene = async (item: SceneDto) => {
+    await Scene.DeleteScene(item.id).catch((res) => console.log(res.msg));
     setIsShowDefaultScene(false);
-  }
+  };
 
-  const onClickEditScene = async (item: SceneDto) =>{
+  const onClickEditScene = async (item: SceneDto) => {
     setIsShowDefaultScene(false);
     setIsShowSceneEdit(true);
     setScene(item);
-  }
+  };
 
-  const onClickSaveScene = async () =>{
+  const onClickSaveScene = async () => {
     if (scene) {
       if (scene.id) {
-        await Scene.PutScene(scene.id, scene).catch(res=>console.log(res.msg));
+        await Scene.PutScene(scene.id, scene).catch((res) =>
+          console.log(res.msg)
+        );
         setIsShowSceneEdit(false);
-      }else{
-        await Scene.CreateScene(scene).catch(res=>console.log(res.msg));
+      } else {
+        await Scene.CreateScene(scene).catch((res) => console.log(res.msg));
         setIsShowSceneEdit(false);
       }
     }
-  }
+  };
 
-  const onClickSaveAsScene = () =>{
+  const onClickSaveAsScene = () => {
     setScene({
       name: "",
       describe: "",
-      content: sessionList.find((p) => p.id === currentSessionRef.current)?.messages||[],
+      content:
+        sessionList.find((p) => p.id === currentSessionRef.current)?.messages ||
+        [],
       isDefault: false,
-      id: ""
+      id: "",
     });
     setIsShowSceneEdit(true);
-  }
+  };
 
   React.useEffect(() => {
     chatScrollToBottom();
@@ -259,79 +287,110 @@ function Chat() {
     createTableColumn({
       columnId: "name",
       renderHeaderCell: () => <>场景</>,
-      renderCell: (item) => <><div onClick={()=>onClickScene(item)}>{item.name}</div></>
+      renderCell: (item) => (
+        <>
+          <div onClick={() => onClickScene(item)}>{item.name}</div>
+        </>
+      ),
     }),
     createTableColumn({
       columnId: "describe",
       renderHeaderCell: () => <>描述</>,
-      renderCell: (item) => <><div onClick={()=>onClickScene(item)}>{item.describe}</div></>
+      renderCell: (item) => (
+        <>
+          <div onClick={() => onClickScene(item)}>{item.describe}</div>
+        </>
+      ),
     }),
     createTableColumn({
       columnId: "option",
       renderHeaderCell: () => <>操作</>,
-      renderCell: (item) => <>{item.isDefault?"预设":
-      <Menu>
-        <MenuTrigger>
-          <ToolbarButton aria-label="More" icon={<MoreHorizontal24Filled />} />
-        </MenuTrigger>
+      renderCell: (item) => (
+        <>
+          {item.isDefault ? (
+            "预设"
+          ) : (
+            <Menu>
+              <MenuTrigger>
+                <ToolbarButton
+                  aria-label="More"
+                  icon={<MoreHorizontal24Filled />}
+                />
+              </MenuTrigger>
 
-        <MenuPopover>
-          <MenuList>
-            <MenuItem icon={<EditRegular />} onClick={()=> onClickEditScene(item)} >修改</MenuItem>
-            <MenuItem icon={<Delete24Regular />} onClick={()=>{onClickDelScene(item)}}>删除</MenuItem>
-          </MenuList>
-        </MenuPopover>
-      </Menu>}
-      </>
-    })
+              <MenuPopover>
+                <MenuList>
+                  <MenuItem
+                    icon={<EditRegular />}
+                    onClick={() => onClickEditScene(item)}
+                  >
+                    修改
+                  </MenuItem>
+                  <MenuItem
+                    icon={<Delete24Regular />}
+                    onClick={() => {
+                      onClickDelScene(item);
+                    }}
+                  >
+                    删除
+                  </MenuItem>
+                </MenuList>
+              </MenuPopover>
+            </Menu>
+          )}
+        </>
+      ),
+    }),
   ]);
 
-  const columnSizingOptions:TableColumnSizingOptions = {
+  const columnSizingOptions: TableColumnSizingOptions = {
     name: {
-      idealWidth: 130
+      idealWidth: 130,
     },
     describe: {
       defaultWidth: 350,
       minWidth: 350,
     },
     option: {
-      idealWidth: 30
+      idealWidth: 30,
     },
   };
 
   const renderRow: RowRenderer<SceneDto> = ({ item, rowId }, style) => (
     <DataGridRow<SceneDto> key={rowId} style={style}>
-      {({ renderCell }) => <DataGridCell className="sy-scene-des">{renderCell(item)}</DataGridCell>}
+      {({ renderCell }) => (
+        <DataGridCell className="sy-scene-des">{renderCell(item)}</DataGridCell>
+      )}
     </DataGridRow>
   );
-  
-   const VirtualizedDataGrid = () => {
+
+  const VirtualizedDataGrid = () => {
     const { targetDocument } = useFluent();
     const scrollbarWidth = useScrollbarWidth({ targetDocument });
-  
+
     return (
       <div style={{ overflowX: "hidden" }}>
         <DataGrid
-        items={sceneList}
-        columns={columns}
-        focusMode="cell"
-        resizableColumns
-        columnSizingOptions={columnSizingOptions}
-      >
-        <DataGridHeader style={{ paddingRight: scrollbarWidth }}>
-          <DataGridRow>
-            {({ renderHeaderCell }) => (
-              <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
-            )}
-          </DataGridRow>
-        </DataGridHeader>
-        <DataGridBody<any> itemSize={50} height={400}>
-          {renderRow}
-        </DataGridBody>
-      </DataGrid>
+          items={sceneList}
+          columns={columns}
+          focusMode="cell"
+          resizableColumns
+          columnSizingOptions={columnSizingOptions}
+        >
+          <DataGridHeader style={{ paddingRight: scrollbarWidth }}>
+            <DataGridRow>
+              {({ renderHeaderCell }) => (
+                <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
+              )}
+            </DataGridRow>
+          </DataGridHeader>
+          <DataGridBody<any> itemSize={50} height={400}>
+            {renderRow}
+          </DataGridBody>
+        </DataGrid>
       </div>
     );
-            }
+  };
 
   return (
     <div className="sy-chat">
@@ -398,52 +457,106 @@ function Chat() {
                 </DialogTrigger>
               }
             >
-              {scene?.id?"编辑场景":"保存新场景"}
+              {scene?.id ? "编辑场景" : "保存新场景"}
             </DialogTitle>
             <DialogContent>
               <div>
                 <div className="sy-scence-edit-msg-list">
-                  {scene?.content.map(item=>(
-                      <div className="sy-scence-edit-msg-item">
-                      <Select className="sy-scence-edit-msg-item-left" value={item.role} onChange={(e,d)=>{item.role = parseInt(`${d.value}`); setScene({...scene});}}>
-                        <option value={"0"} key="User">User</option>
-                        <option value={"1"} key="Assistant">Assistant</option>
-                        <option value={"2"} key="System">System</option>
+                  {scene?.content.map((item) => (
+                    <div className="sy-scence-edit-msg-item">
+                      <Select
+                        className="sy-scence-edit-msg-item-left"
+                        value={item.role}
+                        onChange={(e, d) => {
+                          item.role = parseInt(`${d.value}`);
+                          setScene({ ...scene });
+                        }}
+                      >
+                        <option value={"0"} key="User">
+                          User
+                        </option>
+                        <option value={"1"} key="Assistant">
+                          Assistant
+                        </option>
+                        <option value={"2"} key="System">
+                          System
+                        </option>
                       </Select>
-                      <Textarea className="sy-scence-edit-msg-item-content" value={item.content} onChange={(e,d)=>{item.content = d.value; setScene({...scene});}} />
+                      <Textarea
+                        className="sy-scence-edit-msg-item-content"
+                        value={item.content}
+                        onChange={(e, d) => {
+                          item.content = d.value;
+                          setScene({ ...scene });
+                        }}
+                      />
                       <Button
                         size="small"
                         shape="circular"
                         icon={<Dismiss24Regular />}
                         className="sy-scence-edit-msg-item-del"
-                        onClick={()=>{scene.content.splice(scene.content.indexOf(item), 1); setScene({...scene}) }}
+                        onClick={() => {
+                          scene.content.splice(scene.content.indexOf(item), 1);
+                          setScene({ ...scene });
+                        }}
                       />
                     </div>
                   ))}
                   <div className="sy-scence-edit-msg-add">
-                    <Button className="sy-scence-edit-msg-add-btn" icon={<AddCircle24Regular />} onClick={()=>{scene?.content.push({role: 0, content:"", date: ""}); scene && setScene({...scene});}}>添加对话</Button>
+                    <Button
+                      className="sy-scence-edit-msg-add-btn"
+                      icon={<AddCircle24Regular />}
+                      onClick={() => {
+                        scene?.content.push({ role: 0, content: "", date: "" });
+                        scene && setScene({ ...scene });
+                      }}
+                    >
+                      添加对话
+                    </Button>
                   </div>
                 </div>
                 <div className="sy-scence-edit-form">
                   <Label className="sy-scence-edit-form-label">名称</Label>
-                  <Input className="sy-scence-edit-form-input" value={scene?.name} onChange={(e,d)=>{ scene && (scene.name = d.value); scene && setScene({...scene});}} />
+                  <Input
+                    className="sy-scence-edit-form-input"
+                    value={scene?.name}
+                    onChange={(e, d) => {
+                      scene && (scene.name = d.value);
+                      scene && setScene({ ...scene });
+                    }}
+                  />
                 </div>
                 <div className="sy-scence-edit-form">
                   <Label className="sy-scence-edit-form-label">描述</Label>
-                  <Input className="sy-scence-edit-form-input" value={scene?.describe} onChange={(e,d)=>{ scene && (scene.describe = d.value); scene && setScene({...scene});}} />
+                  <Input
+                    className="sy-scence-edit-form-input"
+                    value={scene?.describe}
+                    onChange={(e, d) => {
+                      scene && (scene.describe = d.value);
+                      scene && setScene({ ...scene });
+                    }}
+                  />
                 </div>
                 <div className="sy-scence-edit-form">
                   <Label className="sy-scence-edit-form-label">预设</Label>
-                  <Checkbox checked={scene?.isDefault} onChange={(e,d)=>{ scene && (scene.isDefault = d.checked as boolean ); scene && setScene({...scene});}} />
+                  <Checkbox
+                    checked={scene?.isDefault}
+                    onChange={(e, d) => {
+                      scene && (scene.isDefault = d.checked as boolean);
+                      scene && setScene({ ...scene });
+                    }}
+                  />
                 </div>
               </div>
             </DialogContent>
             <DialogActions>
-            <DialogTrigger disableButtonEnhancement>
-              <Button appearance="secondary">取消</Button>
-            </DialogTrigger>
-            <Button appearance="primary" onClick={onClickSaveScene} >保存</Button>
-          </DialogActions>
+              <DialogTrigger disableButtonEnhancement>
+                <Button appearance="secondary">取消</Button>
+              </DialogTrigger>
+              <Button appearance="primary" onClick={onClickSaveScene}>
+                保存
+              </Button>
+            </DialogActions>
           </DialogBody>
         </DialogSurface>
       </Dialog>
@@ -467,8 +580,25 @@ function Chat() {
           ))}
         </div>
         <div className="sy-chat-session-switch">
+          <div style={{ width: 102 }}>
+            <Tooltip content="选择模型" relationship="label" withArrow>
+              <Select
+                size="small"
+                value={gptModel}
+                onChange={(e, d) => {
+                  setGptModel(d.value);
+                }}
+              >
+                {GPTModelOptions.map((option) => (
+                  <option key={option.key} value={option.value}>
+                    {option.key}
+                  </option>
+                ))}
+              </Select>
+            </Tooltip>
+          </div>
           <Switch
-            label="开启websocket"
+            label="websocket"
             checked={isWebsocket}
             onChange={onChangeIsWebsocket}
           />
