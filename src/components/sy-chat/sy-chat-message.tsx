@@ -1,7 +1,7 @@
 import * as React from "react";
-import userSvg from '../../assets/user.svg';
-import aiSvg from '../../assets/ai.svg';
-import OmsViewMarkdown from '../markdown';
+import userSvg from "../../assets/user.svg";
+import aiSvg from "../../assets/ai.svg";
+import OmsViewMarkdown from "../markdown";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppStore";
 
 export interface ContentProps {

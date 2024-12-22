@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useImperativeHandle } from "react";
-import "./style/index.css"
+import "./style/index.css";
 
 const SyScroll = React.forwardRef((props: {
   children: JSX.Element | JSX.Element[] | undefined;

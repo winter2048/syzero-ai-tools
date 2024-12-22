@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 import store from "../store";
 import { logOut, setToken } from "../store/reducers/user";
 
@@ -16,23 +16,23 @@ const service = axios.create({
 //统一请求拦截 可配置自定义headers 例如 language、token等
 service.interceptors.request.use(
     (config) => {
-        console.log("ss", store.getState().config.SERVER_URL)
+        console.log("ss", store.getState().config.SERVER_URL);
         config.baseURL = store.getState().config.SERVER_URL;
         //配置自定义请求头
-        const token = window.localStorage.getItem('token');
+        const token = window.localStorage.getItem("token");
         if (token) {
-          config.headers['Authorization'] = token;
+          config.headers["Authorization"] = token;
         }
         // 租户ID
-        config.headers['tenantId'] = '1';
-        config.headers["language"] = 'zh-cn';
-        return config
+        config.headers["tenantId"] = "1";
+        config.headers["language"] = "zh-cn";
+        return config;
     },
     error => {
-        console.log(error)
-        Promise.reject(error)
+        console.log(error);
+        Promise.reject(error);
     }
-)
+);
 //axios返回格式
 interface axiosTypes<T>{
     data: T;
@@ -41,19 +41,19 @@ interface axiosTypes<T>{
 }
 
 //核心处理代码 将返回一个promise 调用then将可获取响应的业务数据
-const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: string, params: object = {}, config: AxiosRequestConfig = {}): Promise<RequestResult<T>> => {
+const requestHandler = <T>(method: "get" | "post" | "put" | "delete", url: string, params: object = {}, config: AxiosRequestConfig = {}): Promise<RequestResult<T>> => {
     let response: Promise<axiosTypes<RequestResult<T>>>;
     switch(method){
-        case 'get':
+        case "get":
             response = service.get(url, {params: { ...params }, ...config});
             break;
-        case 'post':
+        case "post":
             response = service.post(url, params, {...config});
             break;
-        case 'put':
+        case "put":
             response = service.put(url, params, {...config});
             break;
-        case 'delete':
+        case "delete":
             response = service.delete(url, {params: { ...params }, ...config});
             break;
     }
@@ -65,12 +65,12 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             if(data.code !== 1){
                 //特定状态码 处理特定的需求
                 if(data.code === -3){
-                    console.log('登录异常，执行登出...');
+                    console.log("登录异常，执行登出...");
                     store.dispatch(logOut());
                 }
 
-                let e = JSON.stringify(data);
-                console.log(`请求错误：${e}`)
+                const e = JSON.stringify(data);
+                console.log(`请求错误：${e}`);
                 //数据请求错误 使用reject将错误返回
                 reject(data);
             }else{
@@ -79,17 +79,17 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
             }
 
         }).catch(error => {
-            let e = JSON.stringify(error);
-            console.log(`网络错误：${e}`)
+            const e = JSON.stringify(error);
+            console.log(`网络错误：${e}`);
             reject(error);
-        })
-    })
-}
+        });
+    });
+};
 
 // 使用 request 统一调用，包括封装的get、post、put、delete等方法
 export const request = {
-    get: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>('get', url, params, config),
-    post: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>('post', url, params, config),
-    put: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>('put', url, params, config),
-    delete: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>('delete', url, params, config)
+    get: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>("get", url, params, config),
+    post: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>("post", url, params, config),
+    put: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>("put", url, params, config),
+    delete: <T>(url: string, params?: object, config?: AxiosRequestConfig) => requestHandler<T>("delete", url, params, config)
 };

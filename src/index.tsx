@@ -27,6 +27,7 @@ const RootElement = (props: { env: any }) => {
             algorithm:
               THEME === "dark" ? theme.darkAlgorithm : undefined,
             cssVar: true,
+            token: { colorPrimary: "#00b96b" }
           }}
         >
           <Routes />

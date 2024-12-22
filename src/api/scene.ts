@@ -20,5 +20,5 @@ export function GetScene(sceneId: string): Promise<RequestResult<SceneDto>> {
 }
 
 export function SceneList(): Promise<RequestResult<SceneDto[]>> {
-  return request.get<SceneDto[]>(`/api/SyZero.OpenAI/Scenes`);
+  return request.get<SceneDto[]>("/api/SyZero.OpenAI/Scenes");
 }

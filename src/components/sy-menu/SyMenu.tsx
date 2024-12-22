@@ -9,7 +9,7 @@ import SyMenuItem from "./SyMenuItem";
 import IconFont from "../icon-font";
 const { Sider } = Layout;
 
-export const SyMenu = (props: {}) => {
+export const SyMenu = () => {
   const dispatch = useAppDispatch();
   const { THEME, GITHUB_URL } = useAppSelector((state) => state.config);
   const { userName } = useAppSelector((state) => state.user);

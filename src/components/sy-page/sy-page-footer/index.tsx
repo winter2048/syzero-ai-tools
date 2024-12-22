@@ -1,5 +1,5 @@
 import { Flex, Layout } from "antd";
-import "./style/index.css"
+import "./style/index.css";
 const { Footer } = Layout;
 
 export interface SyPageFooterProps {
