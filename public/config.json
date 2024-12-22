@@ -1,5 +1,9 @@
 {
-    "UI_ENVIRONMENT": "Development",
+    "UI_ENVIRONMENT": "Test",
+    "COMMON": {
+      "ICON_URL": ["//at.alicdn.com/t/c/font_2048386_554lsjp2ue8.js"],
+      "GITHUB_URL": "https://github.com/winter2048/syzero-ai-tools"
+    },
     "Development": {
       "SERVER_URL": "http://localhost:5001",
       "SERVER_URL_LOGIN": "http://192.168.2.130:5001",

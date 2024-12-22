@@ -8,6 +8,7 @@ import {
   materialLight,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "github-markdown-css/github-markdown.css";
+import "./style/index.css"
 
 // darcula webstorm
 // vscDarkPlus vscode暗色主题

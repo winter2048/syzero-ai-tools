@@ -1,3 +1,94 @@
 body {
     margin: 0;
 }
+
+body {
+    --bg-color: #fff;
+    --color-text-1: rgba(0, 0, 0, 0.88) --color-text-2: rgba(0, 0, 0, 0.45)
+}
+
+body[data-theme="dark"] {
+    --bg-color: #141414;
+    --color-text-1: rgba(255, 255, 255, 0.85);
+    --color-text-2: rgba(255, 255, 255, 0.45)
+}
+
+.sy-common-center {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.App[data-theme="dark"] {
+    --bg-color: #141414;
+    --color-text-1: rgba(255, 255, 255, 0.85);
+    --color-text-2: rgba(255, 255, 255, 0.45);
+    --ant-color-primary-hover: #3c89e8;
+    --ant-color-primary: #1668dc;
+    --ant-layout-light-sider-bg: #141414;
+    --ant-layout-body-bg: #000000;
+    --ant-blue-1: #111a2c;
+    --sy-login-bg: linear-gradient(to right, #332323, #0a2a39);
+    --sy-login-from-bg: #0000004d;
+    --sy-menu-oc-bg: #ffffff4d;
+    --sy-menu-oc-hover-bg: #ffffff9c;
+
+    --sy-page-header-sub-title: rgba(255, 255, 255, 0.45);
+
+    --sy-chat-session-bg: #2b2b2b;
+    --sy-chat-user-msg-bg: #4b8b3b;
+
+    --sy-chat-room-session-select-bg: #3a3a3a;
+    --sy-chat-room-session-item-bg: rgb(43, 43, 43);
+    --sy-chat-room-session-select-hover-bg: rgb(34, 34, 34);
+
+    --sy-chat-session-add-hover-bg: #4a4a4a;
+    --sy-chat-session-add-active-bg: #4d4d4d;
+    --sy-chat-session-add-border-bg: #4a4a4a;
+    --sy-chat-session-add-bg: #3a3a3a;
+
+    --sy-chat-room-top-border: #3a3a3a;
+
+    --sy-chat-session-item-img-bg: #2a3b5a;
+
+    --sy-chat-msg-border: #2e2e2e;
+    --sy-chat-msg-border-2: #2e2e2e;
+}
+
+.App[data-theme="light"] {
+    --bg-color: #4096ff;
+    --color-text-1: rgba(2, 255, 255, 0.85);
+    --color-text-2: #4096ff;
+    --ant-color-primary-hover: #4096ff;
+    --ant-color-primary: #1677ff;
+    --ant-layout-light-sider-bg: #ffffff;
+    --ant-layout-body-bg: #f5f5f5;
+    --ant-blue-1: #e6f4ff;
+    --ant-color-border: #d9d9d9;
+    --sy-login-bg: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    --sy-login-from-bg: #ffffff4f;
+    --sy-menu-oc-bg: #0000003d;
+    --sy-menu-oc-hover-bg: #0000007d;
+
+    --sy-page-header-sub-title: rgba(0, 0, 0, 0.45);
+
+    --sy-chat-session-bg: #e7e8e9;
+    --sy-chat-user-msg-bg: #9eeb6b;
+
+    --sy-chat-room-session-select-bg: #c9c8c8;
+    --sy-chat-room-session-item-bg: rgb(231, 232, 233);
+    --sy-chat-room-session-select-hover-bg: rgb(221, 221, 221);
+
+    --sy-chat-session-add-hover-bg: #c5c5c5;
+    --sy-chat-session-add-active-bg: #b6b6b6;
+    --sy-chat-session-add-border-bg: #d9d6d6;
+    --sy-chat-session-add-bg: #e5e3e2;
+
+    --sy-chat-room-top-border: #e7e7e7;
+
+    --sy-chat-session-item-img-bg: #c1cde7;
+
+    --sy-chat-msg-border: #ededed;
+    --sy-chat-msg-border-2: #ececec;
+}

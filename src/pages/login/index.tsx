@@ -1,103 +1,89 @@
-import React from "react";
-import {
-  useId,
-  Button,
-  Input,
-  InputProps,
-  InputOnChangeData,
-  Field,
-} from "@fluentui/react-components";
-import { PersonRegular, PasswordRegular } from "@fluentui/react-icons";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Input, message } from "antd";
+import { UserOutlined, EditOutlined } from "@ant-design/icons";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Authorization } from "../../api";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppStore";
+import { setToken } from "../../store/reducers/user";
 import store from "../../store";
 import "../../style/login.css";
 
+type FieldType = {
+  userName: string;
+  password: string;
+};
+
 function Login() {
-  const userId = useId("content-user");
-  const passwordId = useId("input-password");
   const navigate = useNavigate();
-  const [userName, setUserName] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordMsg, setPasswordMsg] = React.useState("");
-  const [userNameMsg, setUserNameMsg] = React.useState("");
-  const onUserNameChange: InputProps["onChange"] = (
-    ev: React.ChangeEvent<HTMLInputElement>,
-    data: InputOnChangeData
-  ) => {
-    setUserNameMsg("");
-    setUserName(data.value);
-  };
-  const onPasswordChange: InputProps["onChange"] = (
-    ev: React.ChangeEvent<HTMLInputElement>,
-    data: InputOnChangeData
-  ) => {
-    setPasswordMsg("");
-    setPassword(data.value);
-  };
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
 
-  const onLoginClick = async () => {
-    if (!userName) {
-      setUserNameMsg("请输入用户名！");
-      return;
-    }
-    if (!password) {
-      setPasswordMsg("请输入密码！");
-      return;
-    }
-
-    const token = await Authorization.Login(userName, password).catch(
-      (res) => res
-    );
+  const onFinish = async (values: FieldType) => {
+    setIsAuthLoading(true);
+    const token = await Authorization.Login(values.userName, values.password)
+      .catch((res) => res)
+      .finally(() => setIsAuthLoading(false));
     if (token.msg) {
-      setPasswordMsg(token.msg);
+      message.error(token.msg);
       return;
     }
 
     window.localStorage.setItem("token", token.data);
-    navigate("/chat");
+    dispatch(setToken({ token: token.data }));
+    const redirect = new URLSearchParams(location.search).get("redirect");
+    if (redirect) {
+      navigate(redirect);
+    } else {
+      navigate("/chat");
+    }
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
     <div className="container">
       <div className="login-wrapper">
-        <div className="header">{ store.getState().config.APP_TITLE }</div>
+        <div className="header">{store.getState().config.APP_TITLE}</div>
         <div className="header-subtitle">登录</div>
         <div className="form-wrapper">
-          <div className="input-item">
-            <Field validationMessage={userNameMsg}>
-              <Input
-                contentBefore={<PersonRegular />}
-                id={userId}
-                value={userName}
-                onChange={onUserNameChange}
-                placeholder="用户名"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid rgb(128, 125, 125)",
-                }}
-              />
-            </Field>
-          </div>
-          <div className="input-item">
-            <Field validationMessage={passwordMsg}>
-              <Input
-                type="password"
-                contentBefore={<PasswordRegular />}
-                id={passwordId}
-                value={password}
-                onChange={onPasswordChange}
-                placeholder="密码"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid rgb(128, 125, 125)",
-                }}
-              />
-            </Field>
-          </div>
-          <Button onClick={onLoginClick} className="btn">
-            登录
-          </Button>
+          <Form
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            layout="vertical"
+            size="large"
+          >
+            <Form.Item<FieldType>
+              name="userName"
+              rules={[{ required: true, message: "请输入用户名！" }]}
+            >
+              <Input placeholder="用户名" />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              name="password"
+              rules={[{ required: true, message: "请输入密码！" }]}
+            >
+              <Input.Password placeholder="密码" />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                shape="round"
+                block
+                loading={isAuthLoading}
+              >
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
         <div className="msg">
           没有帐户

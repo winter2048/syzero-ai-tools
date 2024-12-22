@@ -1,0 +1,7 @@
+.sy-page {
+    background-color: var(--ant-layout-light-sider-bg);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
