@@ -1,22 +1,23 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import store from "../store";
+import { logOut, setToken } from "../store/reducers/user";
 
 //基础URL，axios将会自动拼接在url前
 //process.env.NODE_ENV 判断是否为开发环境 根据不同环境使用不同的baseURL 方便调试
-let baseURL =  store.getState().config.SERVER_URL;
 
 //默认请求超时时间
 const timeout = 90000;
 
 //创建axios实例
 const service = axios.create({
-    timeout,
-    baseURL
+    timeout
 });
 
 //统一请求拦截 可配置自定义headers 例如 language、token等
 service.interceptors.request.use(
     (config) => {
+        console.log("ss", store.getState().config.SERVER_URL)
+        config.baseURL = store.getState().config.SERVER_URL;
         //配置自定义请求头
         const token = window.localStorage.getItem('token');
         if (token) {
@@ -65,7 +66,7 @@ const requestHandler = <T>(method: 'get' | 'post' | 'put' | 'delete', url: strin
                 //特定状态码 处理特定的需求
                 if(data.code === -3){
                     console.log('登录异常，执行登出...');
-                    window.localStorage.setItem("token", "");
+                    store.dispatch(logOut());
                 }
 
                 let e = JSON.stringify(data);

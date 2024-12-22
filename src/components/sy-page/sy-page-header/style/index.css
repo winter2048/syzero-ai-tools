@@ -1,0 +1,29 @@
+.sy-page-header {
+    background-color: var(--ant-layout-light-sider-bg);
+    padding: 0 24px;
+    height: 55px;
+    line-height: 55px;
+}
+
+.sy-page-header-title {
+    margin-right: 12px;
+    color: var(--ant-color-text);
+    height: 100%;
+    line-height: 32px;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 16px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sy-page-header-sub-title {
+    margin-right: 12px;
+    color: var(--sy-page-header-sub-title);
+    font-size: 14px;
+    line-height: 1.5715;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
