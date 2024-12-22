@@ -3,7 +3,7 @@ export interface ContentProps {
   title: string;
   text: string;
   date: string;
-  onClick?: Function;
+  onClick?: () => void;
   select: boolean;
 }
 

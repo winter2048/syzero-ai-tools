@@ -33,7 +33,7 @@ export function GetSession(
 
 export function SessionList(): Promise<RequestResult<ChatSessionDto[]>> {
   return request.get<Array<ChatSessionDto>>(
-    `/api/SyZero.OpenAI/Chat/Sessions`
+    "/api/SyZero.OpenAI/Chat/Sessions"
   );
 }
 

@@ -8,7 +8,7 @@ const initialState: IUser = {
   token: window.localStorage.getItem("token") as string
 };
 
-export const logOut = createAsyncThunk('user/logOut',
+export const logOut = createAsyncThunk("user/logOut",
   async () => {
     await Authorization.LogOut();
   }
@@ -38,7 +38,7 @@ const userSlice = createSlice({
     builder.addCase(logOut.rejected, (state, action) => {
       window.localStorage.setItem("token", "");
       state.token = "";
-    })
+    });
   }
 });
 

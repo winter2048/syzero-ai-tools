@@ -1,6 +1,6 @@
 import { RouteObject, useRoutes } from "react-router-dom";
 import React, { lazy } from "react";
-import { Spin } from 'antd';
+import { Spin } from "antd";
 import RequireAuth from "../components/requireAuth";
 import routes from "./routes";
 const App = lazy(() => import("../pages/app"));

@@ -1,3 +1,3 @@
-import OmsViewMarkdown from './OmsViewMarkdown';
+import OmsViewMarkdown from "./OmsViewMarkdown";
 
 export default OmsViewMarkdown;
