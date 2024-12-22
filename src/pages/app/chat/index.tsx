@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useRef } from "react";
 import SyChatMessage from "../../../components/sy-chat/sy-chat-message";
 import SyChatSession from "../../../components/sy-chat/sy-chat-session";
