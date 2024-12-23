@@ -15,10 +15,28 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const convertStyle = () => {
+  const height = window.innerHeight;
+  console.log(height);
+  Array.from(document.getElementsByClassName("App")).forEach((element:any) => {
+    element.style.height = `${height}px`;
+  });
+};
+
+
 const RootElement = (props: { env: any }) => {
   const dispatch = useAppDispatch();
   dispatch(initState({ ...props.env }));
   const { THEME } = useAppSelector((state) => state.config);
+
+  React.useEffect(() => {
+    convertStyle();
+    window.addEventListener("resize", convertStyle);
+    return () => {
+      window.removeEventListener("resize", convertStyle);
+    };
+  }, []);
+
   return (
     <div className="App" data-theme={THEME ?  THEME:"light"}>
       <HashRouter>

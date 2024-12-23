@@ -19,8 +19,8 @@
 
 .sy-layout-menu {
   text-align: center;
-  height: 100vh;
-  line-height: 100vh;
+  height: 100%;
+  line-height: 100%;
   color: #888;
   background-color: var(--ant-layout-light-sider-bg) !important;
   box-shadow: 0px 0px 4px 0px #8888884d;

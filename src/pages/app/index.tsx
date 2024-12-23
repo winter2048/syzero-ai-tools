@@ -18,7 +18,7 @@ function App() {
     (async function fn() {
       const userInfo = await Authorization.GetUserInfo().catch((res) => {
         if (res.code === -3) {
-         navigate("/login");
+          navigate("/login");
         }
       });
       dispatch(initState({ userName: userInfo?.data.nickName }));
@@ -27,18 +27,14 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
-        <Layout style={{ height: "100vh" }}>
-          <SyMenu/>
-          <Layout>
-            <Content className="sy-layout-content">
-              <Outlet />
-            </Content>
-          </Layout>
-        </Layout>
-      </Space>
-    </div>
+    <Layout style={{ height: "100%" }}>
+      <SyMenu />
+      <Layout>
+        <Content className="sy-layout-content">
+          <Outlet />
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 
