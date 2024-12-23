@@ -34,6 +34,7 @@ import {
   SyPageHeader,
   SyPageContent,
 } from "../../../components/sy-page";
+import SySider from "../../../components/sy-sider";
 import store from "../../../store";
 import "../../../style/chat.css";
 
@@ -50,6 +51,7 @@ function Chat() {
   const [sceneList, setSceneList] = useState<SceneDto[]>([]);
   const [scene, setScene] = useState<SceneDto>();
   const [gptModel, setGptModel] = useState<string>("gpt-4o-mini");
+  const [isClose, setIsClose] = React.useState(false);
   const currentSessionRef = useRef(currentSession);
   const [modal, contextHolder] = Modal.useModal();
   currentSessionRef.current = currentSession;
@@ -460,8 +462,8 @@ function Chat() {
               </div>
             </div>
           </Modal>
-
-          <div className="sy-chat-session">
+          <SySider siderWidth={340} onChange={(isClose) => setIsClose(isClose)}>
+            <div className="sy-chat-session">
             <div className="sy-chat-session-add" onClick={onClickAddSession}>
               +
             </div>
@@ -507,7 +509,8 @@ function Chat() {
               </Tooltip>
             </div>
           </div>
-          <div className="sy-chat-room">
+          </SySider>
+          <div className="sy-chat-room" style={{width: isClose ? "100%" : "calc(100% - 250px)"}}>
             <div className="sy-chat-room-top">
               <div className="sy-chat-room-top-title">
                 {sessionList.find((p) => p.id === currentSession)?.title}
