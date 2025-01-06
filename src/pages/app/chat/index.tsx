@@ -51,6 +51,7 @@ function Chat() {
   const [sceneList, setSceneList] = useState<SceneDto[]>([]);
   const [scene, setScene] = useState<SceneDto>();
   const [gptModel, setGptModel] = useState<string>("gpt-4o-mini");
+  const [aiModels, setAiModels] = useState<any>({});
   const [isClose, setIsClose] = React.useState(false);
   const currentSessionRef = useRef(currentSession);
   const [modal, contextHolder] = Modal.useModal();
@@ -100,6 +101,8 @@ function Chat() {
   };
 
   const GPTModelOptions = [
+    { key: "mymodel-1", value: "ollama:mymodel-1" },
+    { key: "nezahatkorkmaz/deepseek-v3", value: "ollama:nezahatkorkmaz/deepseek-v3" },
     { key: "GPT3.5", value: "gpt-3.5-turbo" },
     { key: "GPT4", value: "gpt-4-1106-preview" },
     { key: "GPT4-Vision", value: "gpt-4-vision-preview" },
@@ -251,6 +254,10 @@ function Chat() {
         setCurrentSession(sessions[0].id);
       }
     };
+
+    OpenAI.GetModels().then((res) => {
+      setAiModels(res.data);
+    });
     fun();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -482,14 +489,15 @@ function Chat() {
               ))}
             </div>
             <div className="sy-chat-session-switch">
-              <div style={{ width: 102 }}>
+              <div style={{ width: 155 }}>
                 <Tooltip title="选择模型">
                   <Select
+                    style={{ width: 155 }}
                     size="small"
                     value={gptModel}
-                    options={GPTModelOptions.map((option) => ({
-                      value: option.value,
-                      label: option.key,
+                    options={Object.keys(aiModels).map((key) => ({
+                      value: aiModels[key],
+                      label: key,
                     }))}
                     onChange={(value) => {
                       setGptModel(value);

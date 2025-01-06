@@ -44,3 +44,9 @@ export function SendMessage(
     "/api/SyZero.OpenAI/Chat/SendMessage",data
   );
 }
+
+export function GetModels(): Promise<RequestResult<any>> {
+  return request.get<any>(
+    "/api/SyZero.OpenAI/Chat/Models"
+  );
+}
