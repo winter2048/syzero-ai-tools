@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useImperativeHandle } from "react";
+import "./style/index.css";
 
 const SyScroll = React.forwardRef((props: {
   children: JSX.Element | JSX.Element[] | undefined;
@@ -19,7 +20,7 @@ const SyScroll = React.forwardRef((props: {
 
   useEffect(() => {
     resizeChild();
-  }, []);
+  });
 
   useEffect(() => {
     window.addEventListener("resize", resizeChild); // 添加resize事件监听器

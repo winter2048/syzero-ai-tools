@@ -1,11 +1,19 @@
-import { Navigate, useLocation } from "react-router-dom";
+import React, { useRef, useEffect, useImperativeHandle } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppStore";
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  let location = useLocation();
-  const token = window.localStorage.getItem("token");
-  if (!token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { token } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!token) {
+      navigate(`/login?redirect=${location.pathname}`);
+    }
+  }, [location.pathname, navigate, token]);
+
   return children;
 }
 

@@ -1,11 +1,12 @@
-import React from 'react';
+import { Flex } from "antd";
+import {SyPage, SyPageHeader} from "../../../components/sy-page";
 
-function App() {
+function Setting() {
   return (
-    <div className="App">
-      <h2>Image</h2>
-    </div>
+    <SyPage>
+      <SyPageHeader title="Image"></SyPageHeader>
+    </SyPage>
   );
 }
 
-export default App;
+export default Setting;

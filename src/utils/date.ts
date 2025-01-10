@@ -1,5 +1,5 @@
 export function formatDate(date: Date, fmt: string) {
-  var o: any = {
+  const o: any = {
     "M+": date.getMonth() + 1, //月份
     "d+": date.getDate(), //日
     "h+": date.getHours(), //小时
@@ -13,7 +13,7 @@ export function formatDate(date: Date, fmt: string) {
       RegExp.$1,
       (date.getFullYear() + "").substr(4 - RegExp.$1.length)
     );
-  for (var k in o)
+  for (const k in o)
     if (new RegExp("(" + k + ")").test(fmt))
       fmt = fmt.replace(
         RegExp.$1,
@@ -30,35 +30,35 @@ export function weChatDate(time: string) {
   if (!time) {
     return "";
   }
-  var thisTime = formatDate(new Date(time), "yyyy/M/d hh:mm:ss");
+  let thisTime = formatDate(new Date(time), "yyyy/M/d hh:mm:ss");
   thisTime = thisTime.replace(/-/g, "/");
-  var time2 = new Date(thisTime);
-  var timestamp = time2.getTime();
-  var mustIncludeTime = false;
+  const time2 = new Date(thisTime);
+  const timestamp = time2.getTime();
+  const mustIncludeTime = false;
   // 当前时间
-  var currentDate = new Date();
+  const currentDate = new Date();
   // 目标判断时间
-  var srcDate = new Date(parseInt(timestamp.toString()));
+  const srcDate = new Date(parseInt(timestamp.toString()));
 
-  var currentYear = currentDate.getFullYear();
-  var currentMonth = currentDate.getMonth() + 1;
-  var currentDateD = currentDate.getDate();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentDateD = currentDate.getDate();
 
-  var srcYear = srcDate.getFullYear();
-  var srcMonth = srcDate.getMonth() + 1;
-  var srcDateD = srcDate.getDate();
+  const srcYear = srcDate.getFullYear();
+  const srcMonth = srcDate.getMonth() + 1;
+  const srcDateD = srcDate.getDate();
 
-  var ret = "";
+  let ret = "";
 
   // 要额外显示的时间分钟
-  var timeExtraStr = mustIncludeTime ? " " + formatDate(srcDate, "hh:mm") : "";
+  const timeExtraStr = mustIncludeTime ? " " + formatDate(srcDate, "hh:mm") : "";
 
   // 当年
   if (currentYear === srcYear) {
-    var currentTimestamp = currentDate.getTime();
-    var srcTimestamp = timestamp;
+    const currentTimestamp = currentDate.getTime();
+    const srcTimestamp = timestamp;
     // 相差时间（单位：毫秒）
-    var deltaTime = currentTimestamp - srcTimestamp;
+    const deltaTime = currentTimestamp - srcTimestamp;
 
     // 当天（月份和日期一致才是）
     if (currentMonth === srcMonth && currentDateD === srcDateD) {
@@ -70,11 +70,11 @@ export function weChatDate(time: string) {
     // 当年 && 当天之外的时间（即昨天及以前的时间）
     else {
       // 昨天（以“现在”的时候为基准-1天）
-      var yesterdayDate = new Date();
+      const yesterdayDate = new Date();
       yesterdayDate.setDate(yesterdayDate.getDate() - 1);
 
       // 前天（以“现在”的时候为基准-2天）
-      var beforeYesterdayDate = new Date();
+      const beforeYesterdayDate = new Date();
       beforeYesterdayDate.setDate(beforeYesterdayDate.getDate() - 2);
 
       // 用目标日期的“月”和“天”跟上方计算出来的“昨天”进行比较，是最为准确的（如果用时间戳差值
@@ -93,11 +93,11 @@ export function weChatDate(time: string) {
         ret = "前天" + timeExtraStr; // -2d
       else {
         // 跟当前时间相差的小时数
-        var deltaHour = deltaTime / (3600 * 1000);
+        const deltaHour = deltaTime / (3600 * 1000);
 
         // 如果小于或等 7*24小时就显示星期几
         if (deltaHour <= 7 * 24) {
-          var weekday = new Array(7);
+          const weekday = new Array(7);
           weekday[0] = "星期日";
           weekday[1] = "星期一";
           weekday[2] = "星期二";
@@ -107,7 +107,7 @@ export function weChatDate(time: string) {
           weekday[6] = "星期六";
 
           // 取出当前是星期几
-          var weedayDesc = weekday[srcDate.getDay()];
+          const weedayDesc = weekday[srcDate.getDay()];
           ret = weedayDesc + timeExtraStr;
         }
         // 否则直接显示完整日期时间

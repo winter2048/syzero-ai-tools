@@ -1,7 +1,8 @@
 import * as React from "react";
-import userSvg from '../../assets/user.svg';
-import aiSvg from '../../assets/ai.svg';
-import OmsViewMarkdown from '../markdown/OmsViewMarkdown';
+import userSvg from "../../assets/user.svg";
+import aiSvg from "../../assets/ai.svg";
+import OmsViewMarkdown from "../markdown";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppStore";
 
 export interface ContentProps {
   role: number;
@@ -10,6 +11,8 @@ export interface ContentProps {
 }
 
 export const SyChatMessage = (props: ContentProps) => {
+  const { THEME } = useAppSelector((state) => state.config);
+
   if (props.role === 1) {
     return (
       <div className="sy-chat-room-center-left">

@@ -1,0 +1,46 @@
+
+.sy-sider {
+    position: relative;
+    transition: all .3s ease;
+}
+
+.sy-sider-oc {
+    width: 25px;
+    height: 30px;
+    position: absolute;
+    background-color: var(--sy-menu-oc-bg);
+    z-index: 1000;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    font-size: 20px;
+    top: calc(100% / 2);
+    right: 0px;
+    z-index: 9999999999999;
+    transform: rotate(180deg);
+}
+
+.sy-sider-oc:hover {
+    background-color: var(--sy-menu-oc-hover-bg);
+}
+
+.sy-sider-oc:active {
+    background-color: var(--sy-menu-oc-bg);
+}
+
+.sy-sider-close {
+    /* transform: translate(-340px, 0px); */
+    width: 0px;
+}
+
+.sy-sider-close .sy-sider-oc {
+    /* left: 340px; */
+    transform: rotate(0deg);
+}
+
+.sy-sider-oc span {
+    color: #fff;
+}
