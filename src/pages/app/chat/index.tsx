@@ -50,7 +50,7 @@ function Chat() {
   const [isShowSceneEdit, setIsShowSceneEdit] = useState(false);
   const [sceneList, setSceneList] = useState<SceneDto[]>([]);
   const [scene, setScene] = useState<SceneDto>();
-  const [gptModel, setGptModel] = useState<string>("gpt-4o-mini");
+  const [gptModel, setGptModel] = useState<string>("OpenAI|gpt-4o-mini");
   const [aiModels, setAiModels] = useState<any>({});
   const [isClose, setIsClose] = React.useState(false);
   const currentSessionRef = useRef(currentSession);
@@ -61,9 +61,14 @@ function Chat() {
     url: `${store.getState().config.SERVER_URL}/chathub`,
   });
 
-  connection?.on("ReceiveMessage", (sessions: ChatSessionDto[]) => {
-    const data = sessionMap(sessions);
-    setSessionList(data);
+  connection?.on("ReceiveMessage", (sessions: ChatSessionDto) => {
+    const data = sessionMap([sessions]);
+    if (sessionList.findIndex((p) => p.id === sessions.id) === -1) {
+      sessionList.push(data[0]);
+    } else {
+      sessionList[sessionList.findIndex((p) => p.id === sessions.id)] = data[0];
+    }
+    setSessionList([...sessionList]);
   });
 
   connection?.on("Disconnect", function () {

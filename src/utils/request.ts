@@ -21,7 +21,7 @@ service.interceptors.request.use(
         //配置自定义请求头
         const token = window.localStorage.getItem("token");
         if (token) {
-          config.headers["Authorization"] = token;
+          config.headers["Authorization"] = `Bearer ${token}`;
         }
         // 租户ID
         config.headers["tenantId"] = "1";
