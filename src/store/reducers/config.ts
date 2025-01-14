@@ -11,6 +11,7 @@ const configSlice = createSlice({
   initialState,
   reducers: {
     changeTheme: (state, actions) => {
+      localStorage.setItem("config_theme", `${actions.payload.THEME}`);
       state.THEME = actions.payload.THEME;
     },
     initState: (state, actions) => {
@@ -21,6 +22,7 @@ const configSlice = createSlice({
       state.APP_TITLE = APP_TITLE;
       state.ICON_URL = ICON_URL;
       state.GITHUB_URL = GITHUB_URL;
+      state.THEME = localStorage.getItem("config_theme") || "";
     },
   },
 });

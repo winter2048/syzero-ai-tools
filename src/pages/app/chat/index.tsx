@@ -45,7 +45,7 @@ function Chat() {
   const [currentSession, setCurrentSession] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [isConnection, setIsConnection] = useState(true);
-  const [isWebsocket, setIsWebsocket] = useState(true);
+  const [isWebsocket, setIsWebsocket] = useState(localStorage.getItem("use_Websocket") !== "false");
   const [isShowDefaultScene, setIsShowDefaultScene] = useState(false);
   const [isShowSceneEdit, setIsShowSceneEdit] = useState(false);
   const [sceneList, setSceneList] = useState<SceneDto[]>([]);
@@ -516,6 +516,7 @@ function Chat() {
                   unCheckedChildren="WS关闭"
                   checked={isWebsocket}
                   onChange={(checked, e) => {
+                    localStorage.setItem("use_Websocket", `${checked}`);
                     setIsWebsocket(checked);
                   }}
                 />
