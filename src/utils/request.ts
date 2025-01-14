@@ -16,7 +16,6 @@ const service = axios.create({
 //统一请求拦截 可配置自定义headers 例如 language、token等
 service.interceptors.request.use(
     (config) => {
-        console.log("ss", store.getState().config.SERVER_URL);
         config.baseURL = store.getState().config.SERVER_URL;
         //配置自定义请求头
         const token = window.localStorage.getItem("token");
