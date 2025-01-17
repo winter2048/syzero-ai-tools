@@ -5,18 +5,15 @@
       "GITHUB_URL": "https://github.com/winter2048/syzero-ai-tools"
     },
     "Development": {
-      "SERVER_URL": "http://localhost:5001",
-      "SERVER_URL_LOGIN": "http://192.168.2.130:5001",
+      "SERVER_URL": "http://localhost:729",
       "APP_TITLE": "AI Tools (Dev)"
     },
     "Production": {
-      "SERVER_URL": "https://openai.syzero.com",
-      "SERVER_URL_LOGIN": "https://authorization.syzero.com",
+      "SERVER_URL": "https://api.syzero.com",
       "APP_TITLE": "AI Tools"
     },
     "Test": {
-      "SERVER_URL": "https://openai.test.syzero.com",
-      "SERVER_URL_LOGIN": "https://authorization.test.syzero.com",
+      "SERVER_URL": "https://api.test.syzero.com",
       "APP_TITLE": "AI Tools (Test)"
     }
   }
