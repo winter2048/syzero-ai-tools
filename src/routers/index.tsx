@@ -57,7 +57,7 @@ function Routes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname == "/" && routes.appIn.find((p) => p.default)?.path) {
+    if (location.pathname === "/" && routes.appIn.find((p) => p.default)?.path) {
       navigate(routes.appIn.find((p) => p.default)?.path || "/");
     }
   }, [location.pathname, navigate]);
