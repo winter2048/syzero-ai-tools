@@ -4,7 +4,7 @@
       "ICON_URL": ["//at.alicdn.com/t/c/font_2048386_554lsjp2ue8.js"],
       "GITHUB_URL": "https://github.com/winter2048/syzero-ai-tools"
     },
-    "Development": {
+    "Dev": {
       "SERVER_URL": "http://localhost:729",
       "APP_TITLE": "AI Tools (Dev)"
     },
