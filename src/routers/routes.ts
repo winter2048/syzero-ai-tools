@@ -4,6 +4,7 @@ const routes: Route = {
       title: "聊天",
       path: "/chat",
       auth: true,
+      default: true,
       component: import("../pages/app/chat"),
     },
     {

@@ -35,6 +35,7 @@ interface RouteItem {
   auth?: boolean;
   component: Promise<any>;
   lazy?: boolean;
+  default?: boolean;
 }
 
 

@@ -1,5 +1,5 @@
-import { RouteObject, useRoutes } from "react-router-dom";
-import React, { lazy } from "react";
+import { RouteObject, useRoutes, useNavigate, useLocation } from "react-router-dom";
+import React, { lazy, useEffect } from "react";
 import { Spin } from "antd";
 import RequireAuth from "../components/requireAuth";
 import routes from "./routes";
@@ -53,7 +53,18 @@ const router: Array<RouteObject> = [
 ];
 
 function Routes() {
-  return useRoutes(router);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname == "/" && routes.appIn.find((p) => p.default)?.path) {
+      navigate(routes.appIn.find((p) => p.default)?.path || "/");
+    }
+  }, [location.pathname, navigate]);
+
+  return (
+    useRoutes(router)
+  );
 }
 
 export default Routes;
