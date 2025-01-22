@@ -12,7 +12,19 @@ const routes: Route = {
       path: "/image",
       auth: true,
       component: import("../pages/app/image"),
-    }
+    },
+    {
+      title: "文库",
+      path: "/document",
+      auth: true,
+      component: import("../pages/app/document"),
+    },
+    {
+      title: "设置",
+      path: "/config",
+      auth: true,
+      component: import("../pages/app/config"),
+    },
   ],
   appOut: [
     {

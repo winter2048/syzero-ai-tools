@@ -4,7 +4,7 @@ import {SyPage, SyPageHeader} from "../../../components/sy-page";
 function Setting() {
   return (
     <SyPage>
-      <SyPageHeader title="图片"></SyPageHeader>
+      <SyPageHeader title="文库"></SyPageHeader>
     </SyPage>
   );
 }

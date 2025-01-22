@@ -7,18 +7,19 @@ export interface SyPageHeaderProps {
   className?: string;
   title?: string;
   subTitle?: string;
+  size?: number;
 }
 export const SyPageHeader = (props: SyPageHeaderProps) => {
   return (
     <Header className={`sy-page-header ${props.className}`}>
       {
         props.title && (
-          <span className="sy-page-header-title">{props.title}</span>
+          <span className="sy-page-header-title" style={{fontSize: props.size}}>{props.title}</span>
         )
       }
       {
         props.subTitle && (
-          <span className="sy-page-header-sub-title">{props.subTitle}</span>
+          <span className="sy-page-header-sub-title" style={{fontSize: props.size}}>{props.subTitle}</span>
         )
       }
       {props.children}
