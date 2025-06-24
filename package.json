@@ -6,7 +6,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docs": "dumi build && dumi preview",
+    "docs:build": "dumi build",
+    "docs:dev": "dumi dev"
   },
   "dependencies": {
     "@microsoft/signalr": "^7.0.5",
@@ -42,6 +45,7 @@
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-syntax-highlighter": "^15.5.7",
     "@types/react-window": "^1.8.7",
+    "dumi": "^2.4.20",
     "eslint": "^8.57.1"
   },
   "eslintConfig": {
