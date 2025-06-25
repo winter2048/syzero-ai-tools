@@ -12,7 +12,7 @@ const useSignalR: UseSignalRHook = ({ url }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const hubConnection = new HubConnectionBuilder().withUrl(url + "?accessToken=" + window.localStorage.getItem("token")).build();
+    const hubConnection = new HubConnectionBuilder().withUrl(url + "?accessToken=" + window.localStorage.getItem("token")).withAutomaticReconnect().build();
     setConnection(hubConnection);
 
     const startConnection = async () => {

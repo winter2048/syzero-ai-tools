@@ -17,6 +17,16 @@ const menus: MenuItem[] = [
     title: "图片",
     icon: WalletOutlined,
     path: "/image",
+  },
+  {
+    title: "文库",
+    icon: ReadOutlined,
+    path: "/document",
+  },
+  {
+    title: "设置",
+    icon: SettingOutlined,
+    path: "/config",
   }
 ];
 

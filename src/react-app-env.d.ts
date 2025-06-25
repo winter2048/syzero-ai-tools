@@ -8,7 +8,6 @@ interface IUser {
 
 interface IConfig{
   SERVER_URL?: string;
-  SERVER_URL_LOGIN?: string;
   APP_TITLE?: string;
   THEME?: string; 
   ICON_URL?: string[];
@@ -36,6 +35,7 @@ interface RouteItem {
   auth?: boolean;
   component: Promise<any>;
   lazy?: boolean;
+  default?: boolean;
 }
 
 

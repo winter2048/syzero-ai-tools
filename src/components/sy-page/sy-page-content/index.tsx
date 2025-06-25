@@ -3,7 +3,7 @@ import "./style/index.css";
 const { Content } = Layout;
 
 export interface SyPageContentProps {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
   className?: string;
 }
 export const SyPageContent = (props: SyPageContentProps) => {
