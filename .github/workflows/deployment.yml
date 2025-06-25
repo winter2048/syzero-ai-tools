@@ -55,7 +55,7 @@ jobs:
             environment=${{ inputs.environment }}
           fi
           if [ "$environment" == "Production" ]; then
-            echo "CONTAINER_PORT=${{ secrets.CONTAINER_PROD_PORT }}" >> $GITHUB_ENV
+            echo "CONTAINER_PORT=${{ env.CONTAINER_PROD_PORT }}" >> $GITHUB_ENV
           fi
           if [ "$environment" == "Test" ]; then
             echo "CONTAINER_PORT=${{ env.CONTAINER_TEST_PORT }}" >> $GITHUB_ENV
