@@ -2,6 +2,8 @@
 
 本项目由 [Create React App](https://github.com/facebook/create-react-app) 引导创建。
 
+[English](./README.md-US.md) ・ 简体中文 ・ [Changelog](./CHANGELOG.md) · [Report Bug][issues-url] · [Request Feature][issues-url]
+
 ## 可用脚本
 
 在项目目录下，你可以运行：
