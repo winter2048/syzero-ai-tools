@@ -1,6 +1,5 @@
 ---
-nav: Test
-group: Test2
+group: API Reference
 title: EdgeSpeechTTS
 apiHeader:
   pkg: '@lobehub/tts'
@@ -33,7 +32,7 @@ import path from 'path';
 // Instantiate EdgeSpeechTTS
 const tts = new EdgeSpeechTTS({ locale: 'zh-CN' });
 
-// Create a speech synthesis request payload
+// Create speech synthesis request payload
 const payload = {
   input: 'This is a speech demonstration',
   options: {
@@ -43,7 +42,7 @@ const payload = {
 
 const speechFile = path.resolve('./speech.mp3');
 
-// Call the create method to synthesize speech
+// Call create method to synthesize speech
 const response = await tts.create(payload);
 const mp3Buffer = Buffer.from(await response.arrayBuffer());
 
@@ -61,7 +60,7 @@ Run in Node.js:
 Since the Node.js environment lacks a native `WebSocket` implementation, we need to polyfill it by importing the `ws` package.
 
 ```js
-// Import at the top of your file
+// Import at the top of the file
 import WebSocket from 'ws';
 
 global.WebSocket = WebSocket;
@@ -78,11 +77,11 @@ global.WebSocket = WebSocket;
 
 ### `voiceOptions`
 
-Retrieves the speech options available for the current instance, based on the `locale` specified during instantiation. Returns an object containing the current available voice options.
+Retrieves the speech options available for the current instance, based on the `locale` specified during instantiation. Returns an object containing the current available speech options.
 
 ### `createAudio(payload: EdgeSpeechPayload): Promise<AudioBuffer>`
 
-Creates speech audio from the provided request payload.
+Creates speech synthesis using the provided request payload.
 
 #### Parameters
 
@@ -90,5 +89,5 @@ Creates speech audio from the provided request payload.
 
 #### Return Value
 
-A `Promise` that resolves to an `AudioBuffer` containing the synthesized audio data.
+A `Promise` that resolves to an `AudioBuffer` object containing the synthesized audio data.
 

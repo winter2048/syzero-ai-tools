@@ -1,7 +1,7 @@
 ---
 nav: Test
 group: Test2
-title: EdgeSpeechTTS
+title: EdgeSpeechTTS2
 apiHeader:
   pkg: '@lobehub/tts'
 ---
@@ -19,7 +19,7 @@ constructor(options: EdgeSpeechAPI): EdgeSpeechTTS
 
 - `options`: An optional object.
   - `serviceUrl`: A string specifying the URL of the Edge Speech Service. If provided, requests will be sent to this URL.
-  - `locale`: A string indicating the desired speech locale. If provided, it will be used to filter the list of available voices.
+  - `locale`: A string specifying the speech locale to use. If provided, it will be used to filter the list of available voices.
 
 ## Example
 
@@ -33,7 +33,7 @@ import path from 'path';
 // Instantiate EdgeSpeechTTS
 const tts = new EdgeSpeechTTS({ locale: 'zh-CN' });
 
-// Create a speech synthesis request payload
+// Create speech synthesis request payload
 const payload = {
   input: 'This is a speech demonstration',
   options: {
@@ -43,7 +43,7 @@ const payload = {
 
 const speechFile = path.resolve('./speech.mp3');
 
-// Call the create method to synthesize speech
+// Call create method to synthesize speech
 const response = await tts.create(payload);
 const mp3Buffer = Buffer.from(await response.arrayBuffer());
 
@@ -78,11 +78,11 @@ global.WebSocket = WebSocket;
 
 ### `voiceOptions`
 
-Retrieves the speech options available for the current instance, based on the `locale` specified during instantiation. Returns an object containing the current available voice options.
+Retrieves the voice options available for the current instance, based on the `locale` specified during instantiation. Returns an object containing the current available voice options.
 
 ### `createAudio(payload: EdgeSpeechPayload): Promise<AudioBuffer>`
 
-Creates speech audio from the provided request payload.
+Creates speech synthesis using the provided request payload.
 
 #### Parameters
 
@@ -90,5 +90,5 @@ Creates speech audio from the provided request payload.
 
 #### Return Value
 
-A `Promise` that resolves to an `AudioBuffer` containing the synthesized audio data.
+Returns a `Promise` that resolves to an `AudioBuffer` object containing the synthesized audio data.
 
