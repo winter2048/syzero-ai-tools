@@ -10,7 +10,8 @@
     "docs": "dumi build && dumi preview",
     "docs:build": "dumi build",
     "docs:dev": "dumi dev",
-    "i18n-md": "lobe-i18n md"
+    "i18n-md": "lobe-i18n md",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@microsoft/signalr": "^7.0.5",
